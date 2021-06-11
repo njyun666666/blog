@@ -9,12 +9,12 @@ export class MenuService {
   menuList: MenuModel[] = [
     {
       title: 'HOME',
-      icon: 'home-outline',
+      icon: 'fas fa-user',
       url: '/pages/dashboard'
     },
     {
       title: '2',
-      icon: 'home-outline',
+      icon: 'fas fa-user',
       url: '/pages/dashboard/d2',
       children: [
         {
@@ -32,14 +32,14 @@ export class MenuService {
           ],
         },
         {
-          title: 'd2-2',
+          title: '2-2',
           url: '/pages/Test',
         },
       ],
     },
     {
       title: '3',
-      icon: 'shuffle-2-outline',
+      icon: 'fas fa-user',
       children: [
         {
           title: '3-1',

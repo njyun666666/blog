@@ -10,15 +10,11 @@ export class MeunComponent implements OnInit {
 
   @Input() in_menuList?: MenuModel[];
 
-
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-
-  toggle() {
 
   }
+
 
 }

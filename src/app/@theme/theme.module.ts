@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { MeunComponent } from './components/meun/meun.component';
+import { RouterModule } from '@angular/router';
 
 const components = [
   MainLayoutComponent
@@ -15,6 +16,7 @@ const components = [
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MaterialModule
   ],
   exports: [

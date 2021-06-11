@@ -1,3 +1,43 @@
+<ng-container *ngFor="let item of in_menuList">
 
 
-<a mat-list-item *ngFor="let item of in_menuList" routerLink="item.url">{{item.title}}</a>
+  <ng-container *ngIf="!item.children; else elseTemplate">
+
+
+
+    <a mat-list-item [routerLink]="[item.url]"  >
+      <span class="menu-icon">
+        <i [class]="item.icon"></i>
+      </span>
+      {{item.title}}
+    </a>
+
+  </ng-container>
+  <ng-template #elseTemplate>
+
+
+    <mat-accordion displayMode="flat">
+      <mat-expansion-panel >
+
+        <mat-expansion-panel-header [collapsedHeight]="'48px'" [expandedHeight]="'48px'" >
+
+          <span class="menu-icon" *ngIf="item.icon">
+            <i [class]="item.icon"></i>
+          </span>
+
+          {{item.title}}
+
+        </mat-expansion-panel-header>
+
+
+        <app-meun [in_menuList]="item.children"></app-meun>
+
+
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </ng-template>
+
+
+
+</ng-container>
