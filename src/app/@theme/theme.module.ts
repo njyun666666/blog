@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { MeunComponent } from './components/meun/meun.component';
 import { RouterModule } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
 
 const components = [
   MainLayoutComponent
@@ -12,7 +13,8 @@ const components = [
 @NgModule({
   declarations: [
     ...components,
-    MeunComponent
+    MeunComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
