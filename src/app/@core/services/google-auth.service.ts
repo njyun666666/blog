@@ -169,7 +169,7 @@ export class GoogleAuthService {
 
 
 
-    console.log('google auth ---- setUserProfile ---', this.googleUser);
+    // console.log('google auth ---- setUserProfile ---', this.googleUser);
   }
 
 
