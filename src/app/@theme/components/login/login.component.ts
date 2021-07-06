@@ -1,3 +1,4 @@
+import { LoginService } from './../../../@core/services/login.service';
 import { GoogleBasicProfile } from './../../../@core/models/google/google-basic-profile';
 import { GoogleAuthService } from './../../../@core/services/google-auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   isLogin: boolean = false;
 
   constructor(
-    private googleAuthService: GoogleAuthService
+    private googleAuthService: GoogleAuthService,
+    private loginService: LoginService
   ) {
 
   }
@@ -21,13 +23,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.googleAuthService.isLogin$.subscribe((result) => {
+    this.loginService.isLogin$.subscribe((data) => {
       this.user = this.googleAuthService.googleUser;
-      this.isLogin = result;
+      this.isLogin = data;
     });
 
-
-    this.googleAuthService.isSignedIn().then(() => {
+    this.loginService.isLogin().then(() => {
 
       this.user = this.googleAuthService.googleUser;
 
@@ -40,11 +41,11 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    this.googleAuthService.signIn();
+    this.loginService.login();
   }
 
   logout() {
-    this.googleAuthService.signOut();
+    this.loginService.logout();
   }
 
 }

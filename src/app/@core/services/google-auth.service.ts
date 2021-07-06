@@ -15,7 +15,6 @@ export class GoogleAuthService {
   isLoadAuth2: boolean = false;
   googleUser = new GoogleBasicProfile();
 
-  isLogin$ = new BehaviorSubject<boolean>(false);
 
 
   constructor() {
@@ -106,7 +105,7 @@ export class GoogleAuthService {
         if (this.auth2.isSignedIn.get()) {
           // console.log('-------------- isSignedIn ------------', this.auth2.isSignedIn.get());
           this.setUserProfile();
-          this.isLogin$.next(true);
+
           // resolve(true);
 
           if (this.checkTokenExpires()) {
@@ -169,7 +168,7 @@ export class GoogleAuthService {
 
 
 
-    // console.log('google auth ---- setUserProfile ---', this.googleUser);
+    console.log('google auth ---- setUserProfile ---', this.googleUser);
   }
 
 
@@ -194,7 +193,6 @@ export class GoogleAuthService {
             // console.log(response);
 
             this.setUserProfile();
-            this.isLogin$.next(true);
 
             resolve(this.googleUser);
 
@@ -259,7 +257,6 @@ export class GoogleAuthService {
 
       this.isAuth2load().then((result) => {
 
-        this.isLogin$.next(false);
 
         let signOutPromise;
         if (revoke) {

@@ -22,9 +22,15 @@ export class TokenInterceptor implements HttpInterceptor {
     let newRequest = request.clone();
 
     if (this.googleAuthService.googleUser) {
-      newRequest = request.clone({ setHeaders: { token: this.googleAuthService.googleUser.id_token } });
+      newRequest = newRequest.clone({ setHeaders: { gtoken: this.googleAuthService.googleUser.id_token } });
     }
 
+
+    const token = this.jwtService.getToken();
+
+    if (token) {
+      newRequest = newRequest.clone({ setHeaders: { token: token } });
+    }
 
     return next.handle(newRequest);
   }

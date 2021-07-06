@@ -7,9 +7,16 @@ export class JwtService {
 
   constructor() { }
 
-  getToken(): void {
-    console.log('getToken()');
-    // return window.localStorage['jwtToken'];
+  getToken(): string {
+    return window.localStorage['jwtToken'];
+  }
+
+  saveToken(token: string) {
+    window.localStorage['jwtToken'] = token;
+  }
+
+  destroyToken() {
+    window.localStorage.removeItem('jwtToken');
   }
 
 }
