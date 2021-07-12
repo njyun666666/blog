@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { ApiService } from './api.service';
 import { Injectable } from '@angular/core';
 import { MenuModel } from '../models/menu.model';
 
@@ -221,8 +223,13 @@ export class MenuService {
     }
   ];
 
-  constructor() { }
+  constructor(
+    private apiService: ApiService
+  ) { }
 
+  getMenu(type: number): Observable<MenuModel[]> {
+    return this.apiService.get('/Menu/MenuGet/' + type);
+  }
 
 
 }

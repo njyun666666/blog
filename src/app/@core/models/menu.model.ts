@@ -1,5 +1,6 @@
 export interface MenuModel {
-  title: string;
+  menuID?: number;
+  title?: string;
   url?: string;
   icon?: string;
   children?: MenuModel[];

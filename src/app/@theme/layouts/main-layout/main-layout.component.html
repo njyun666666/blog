@@ -9,18 +9,16 @@
 
     <span class="spacer"></span>
 
+
     <app-login></app-login>
 
-    <!-- <button mat-icon-button class="icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button> -->
 
   </mat-toolbar>
 
   <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
 
-    <mat-sidenav #snav class="mat-sidenav" [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
-      fixedTopGap="56" [opened]="sidebarOpened">
+    <mat-sidenav #snav class="mat-sidenav" [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="sidebarOpened">
       <mat-nav-list>
         <app-meun class="app-meun" [in_menuList]="menuList"></app-meun>
       </mat-nav-list>

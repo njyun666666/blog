@@ -1,0 +1,19 @@
+<mat-menu #childMenu="matMenu" xPosition="before">
+
+  <ng-container *ngFor="let item of in_menuList">
+
+
+    <ng-container *ngIf="!item.children; else elseTemplate">
+      <a mat-menu-item [routerLink]="item.url">{{item.title}}</a>
+    </ng-container>
+    <ng-template #elseTemplate>
+
+      <button mat-menu-item [matMenuTriggerFor]="menu.childMenu">{{item.title}}</button>
+      <app-toolbar-menu-item #menu [in_menuList]="item.children"></app-toolbar-menu-item>
+
+    </ng-template>
+
+
+  </ng-container>
+
+</mat-menu>
