@@ -33,7 +33,10 @@ export class LoginService {
 
           this.isLogin$.next(true);
 
-        });
+        },
+          (err) => {
+            this.logout();
+          });
 
 
       })
@@ -45,7 +48,7 @@ export class LoginService {
 
   }
 
-  logout(){
+  logout() {
     this.jwtService.destroyToken();
     this.googleAuthService.signOut();
     this.isLogin$.next(false);
@@ -58,8 +61,10 @@ export class LoginService {
 
           const token = this.jwtService.getToken();
           if (token == undefined || token == null || token.length == 0) {
-            this.googleAuthService.signOut();
-            reject(false);
+            this.googleAuthService.signOut().then(() => {
+              reject(false);
+            }).catch(() => { reject(false); });
+
           }
 
           this.isLogin$.next(true);
