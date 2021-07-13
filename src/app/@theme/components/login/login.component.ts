@@ -22,18 +22,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.user = this.googleAuthService.googleUser;
 
     this.loginService.isLogin$.subscribe((data) => {
       this.user = this.googleAuthService.googleUser;
       this.isLogin = data;
     });
-
-    this.loginService.isLogin().then(() => {
-
-      this.user = this.googleAuthService.googleUser;
-
-    }).catch(() => { });
-
 
 
 

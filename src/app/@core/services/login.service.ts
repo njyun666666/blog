@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { JwtService } from './jwt.service';
 import { GoogleAuthService } from './google-auth.service';
 import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class LoginService {
   constructor(
     private googleAuthService: GoogleAuthService,
     private apiService: ApiService,
-    private jwtService: JwtService
+    private jwtService: JwtService,
+    private router: Router
   ) { }
 
 
@@ -52,6 +54,23 @@ export class LoginService {
     this.jwtService.destroyToken();
     this.googleAuthService.signOut();
     this.isLogin$.next(false);
+
+    const path = window.location.pathname;
+    const needRedirectPage = ['/settings'];
+
+    needRedirectPage.forEach(x => {
+
+      if (path.indexOf(x) == 0) {
+        this.router.navigate(['/']);
+      }
+
+    });
+
+  }
+
+  noLoginRedirect() {
+    this.logout();
+    this.router.navigate(['/']);
   }
 
   isLogin(): Promise<boolean> {
