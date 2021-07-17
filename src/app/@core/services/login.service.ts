@@ -51,9 +51,8 @@ export class LoginService {
   }
 
   logout() {
-    this.jwtService.destroyToken();
-    this.googleAuthService.signOut();
-    this.isLogin$.next(false);
+
+    this.cleanLoginToken();
 
     const path = window.location.pathname;
     const needRedirectPage = ['/settings'];
@@ -68,6 +67,13 @@ export class LoginService {
 
   }
 
+  cleanLoginToken() {
+    console.log('cleanLoginToken()');
+    this.jwtService.destroyToken();
+    this.googleAuthService.signOut();
+    this.isLogin$.next(false);
+  }
+
   noLoginRedirect() {
     this.logout();
     this.router.navigate(['/']);
@@ -75,25 +81,44 @@ export class LoginService {
 
   isLogin(): Promise<boolean> {
     return new Promise((resolve, reject) => {
+
+      // 先檢查google sign
       this.googleAuthService.isSignedIn()
         .then(() => {
 
           const token = this.jwtService.getToken();
-          if (token == undefined || token == null || token.length == 0) {
-            this.googleAuthService.signOut().then(() => {
-              reject(false);
-            }).catch(() => { reject(false); });
+          if (token) {
 
+            // 檢查token
+            this.loginCheckAPI().toPromise().then(() => {
+              // console.log('---  loginCheckAPI()');
+
+              this.isLogin$.next(true);
+              resolve(true);
+
+            }).catch((err) => {
+              // console.log('---  loginCheckAPI()', err);
+              this.cleanLoginToken();
+              reject(false);
+            });
+
+          } else {
+            this.cleanLoginToken();
+            reject(false);
           }
 
-          this.isLogin$.next(true);
-          resolve(true);
         })
-        .catch(() => {
+        .catch((err) => {
+          // console.log('googleAuthService.isSignedIn()', err);
+          this.cleanLoginToken();
           reject(false);
-        })
+        });
+
     });
   }
 
+  loginCheckAPI() {
+    return this.apiService.post('/Login/Check');
+  }
 
 }

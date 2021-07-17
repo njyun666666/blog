@@ -72,7 +72,7 @@ export class GoogleAuthService {
           if (count > 1000) {
             console.error('gapi load error');
             clearInterval(interval);
-            resolve(false);
+            reject(false);
           }
 
 
@@ -117,7 +117,7 @@ export class GoogleAuthService {
               // console.log(re);
 
             }).catch((re) => {
-              console.log('refreshAuthToken', re);
+              // console.log('refreshAuthToken', re);
 
               reject(false);
             });
@@ -129,13 +129,13 @@ export class GoogleAuthService {
 
 
         } else {
-          console.log('-------------- isSignedIn ------------  else auth2.isSignedIn.get() ', false);
+          // console.log('-------------- isSignedIn ------------  else auth2.isSignedIn.get() ', false);
           reject(false);
         }
 
 
       }).catch(() => {
-        console.log('-------------- isSignedIn ------------  catch ', false);
+        // console.log('-------------- isSignedIn ------------  catch ', false);
         reject(false);
 
       });
