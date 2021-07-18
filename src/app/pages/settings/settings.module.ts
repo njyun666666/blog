@@ -1,4 +1,5 @@
-import { MaterialModule } from './../../shared/material.module';
+import { SharedModule } from './../../shared/shared.module';
+import { MaterialModule } from '../../shared/modules/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -17,7 +18,8 @@ import { ArticlesTypeComponent } from './articles-type/articles-type.component';
   imports: [
     CommonModule,
     SettingsRoutingModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ]
 })
 export class SettingsModule { }

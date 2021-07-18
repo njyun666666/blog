@@ -1,7 +1,1 @@
-<nav mat-tab-nav-bar>
-  <a mat-tab-link *ngFor="let link of menu" (click)="activeLink=link.url" [active]="activeLink == link.url"
-    [routerLink]="link.url"> {{link.title}}
-  </a>
-</nav>
-
-<router-outlet></router-outlet>
+<app-nav-content [in_menu_type]=2></app-nav-content>

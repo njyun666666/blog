@@ -8,6 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const modules = [
   MatToolbarModule,
@@ -17,7 +18,8 @@ const modules = [
   MatListModule,
   MatExpansionModule,
   MatMenuModule,
-  MatTabsModule
+  MatTabsModule,
+  MatProgressSpinnerModule
 ]
 
 @NgModule({

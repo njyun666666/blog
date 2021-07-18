@@ -9,8 +9,7 @@ import { MenuModel } from 'src/app/@core/models/menu.model';
 })
 export class SettingsComponent implements OnInit {
 
-  menu!: MenuModel[];
-  activeLink!: string;
+
 
 
   constructor(
@@ -18,11 +17,6 @@ export class SettingsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    this.menuService.getMenu(2).subscribe((data) => {
-      this.menu = data;
-      this.activeLink = window.location.pathname;
-    }, (err) => { console.log(err); });
 
 
 

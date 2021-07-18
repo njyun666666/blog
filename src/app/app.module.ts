@@ -1,4 +1,3 @@
-import { MaterialModule } from './shared/material.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './@core/core.module';
 import { NgModule } from '@angular/core';
@@ -19,8 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    SharedModule,
-    MaterialModule
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
