@@ -3,6 +3,7 @@ import { LoginCheckGuard } from '../@core/guards/login-check.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
+import { AuthGuard } from '../@core/guards/auth.guard';
 
 const routes: Routes = [{
   path: '',
@@ -11,7 +12,7 @@ const routes: Routes = [{
   children: [
     { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
     { path: 'dashbord', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
-    { path: 'settings', canActivate: [LoginCheckGuard], loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) },
+    { path: 'settings', canActivate: [AuthGuard], data: { role: 'Blogger' }, loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) },
   ]
 }];
 

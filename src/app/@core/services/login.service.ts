@@ -68,7 +68,7 @@ export class LoginService {
   }
 
   cleanLoginToken() {
-    console.log('cleanLoginToken()');
+
     this.jwtService.destroyToken();
     this.googleAuthService.signOut();
     this.isLogin$.next(false);

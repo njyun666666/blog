@@ -26,7 +26,7 @@ export class LoginGuard implements CanActivate, CanActivateChild {
 
 
   doCanActivate(
-    Route: ActivatedRouteSnapshot,
+    route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot)
     : Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
