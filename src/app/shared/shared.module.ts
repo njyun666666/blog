@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
     MaterialModule
   ],
   exports: [
+    MaterialModule,
     NavContentComponent
   ]
 })

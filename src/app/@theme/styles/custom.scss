@@ -4,3 +4,25 @@
     padding-bottom: 0 !important;
   }
 }
+.container {
+  .page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .page-content {
+    padding: 15px;
+    flex: 1;
+    overflow: auto;
+  }
+  .page-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+
+    button,
+    a {
+      margin: 5px;
+    }
+  }
+}

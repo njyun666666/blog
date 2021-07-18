@@ -9,6 +9,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
 
 const modules = [
   MatToolbarModule,
@@ -19,7 +24,12 @@ const modules = [
   MatExpansionModule,
   MatMenuModule,
   MatTabsModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatCheckboxModule,
+  MatRadioModule,
+  MatSelectModule
 ]
 
 @NgModule({

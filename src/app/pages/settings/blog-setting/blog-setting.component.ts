@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-blog-setting',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogSettingComponent implements OnInit {
 
-  constructor() { }
+  form = new FormGroup({
+    title: new FormControl(null),
+    status: new FormControl(1)
+  });
+
+  constructor(
+    private fb: FormBuilder
+  ) { }
 
   ngOnInit(): void {
   }
