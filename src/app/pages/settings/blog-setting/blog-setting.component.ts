@@ -1,3 +1,4 @@
+import { SettingsService } from './../../../@core/services/settings.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
@@ -14,10 +15,16 @@ export class BlogSettingComponent implements OnInit {
   });
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private settingsService: SettingsService
   ) { }
 
   ngOnInit(): void {
+
+    this.settingsService.getSetting().subscribe((data) => {
+      this.form.patchValue(data);
+    });
+
   }
 
 }
