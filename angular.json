@@ -31,6 +31,9 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/scss/bootstrap-grid.scss",
+              "./node_modules/bootstrap/scss/bootstrap-utilities.scss",
+              "./node_modules/bootstrap/scss/bootstrap-reboot.scss",
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/app/@theme/styles/custom.scss",
               "src/app/@theme/styles/custom-dark.scss",
@@ -106,6 +109,9 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/scss/bootstrap-grid.scss",
+              "./node_modules/bootstrap/scss/bootstrap-utilities.scss",
+              "./node_modules/bootstrap/scss/bootstrap-reboot.scss",
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/app/@theme/styles/custom.scss",
               "src/app/@theme/styles/custom-dark.scss",

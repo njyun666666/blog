@@ -1,12 +1,12 @@
-<div class="container">
+<div class="navc-container">
 
-  <nav mat-tab-nav-bar class="nav">
+  <nav mat-tab-nav-bar class="navc-nav">
     <a mat-tab-link *ngFor="let link of menu" (click)="activeLink=link.url" [active]="activeLink == link.url"
       [routerLink]="link.url"> {{link.title}}
     </a>
   </nav>
 
-  <div class="content">
+  <div class="navc-content">
     <router-outlet></router-outlet>
   </div>
 
