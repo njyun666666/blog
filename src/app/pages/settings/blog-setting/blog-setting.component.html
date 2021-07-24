@@ -4,29 +4,46 @@
   <div class="page-content">
 
 
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-      <mat-form-field appearance="fill">
-        <mat-label>Blog標題</mat-label>
-        <input matInput formControlName="title">
-      </mat-form-field>
 
-      <div>
-        <label>啟用Blog</label>
-        <mat-radio-group formControlName="status">
-          <mat-radio-button [value]="1">啟用</mat-radio-button>
-          <mat-radio-button [value]="2">停用</mat-radio-button>
-        </mat-radio-group>
+
+      <div class="row mb-3">
+
+        <mat-form-field appearance="fill" class="col">
+          <mat-label>Blog標題</mat-label>
+          <input matInput formControlName="title">
+          <mat-error *ngIf="title.hasError('required')">
+            請輸入Blog標題
+          </mat-error>
+        </mat-form-field>
+
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-2 col-md-1">
+          <label>啟用Blog</label>
+        </div>
+
+        <div class="col-sm-10 col-md-11 ">
+          <mat-radio-group formControlName="status">
+            <mat-radio-button [value]="1">啟用</mat-radio-button>
+            <mat-radio-button [value]="2">停用</mat-radio-button>
+          </mat-radio-group>
+        </div>
       </div>
 
 
     </form>
 
-    <pre>
+    <!-- <pre>
 {{form.value|json}}
-  </pre>
+  </pre> -->
 
   </div>
+
+
 
   <div class="page-footer">
 
@@ -34,9 +51,12 @@
     </div>
 
     <div class="page-footer-right">
-      <button mat-raised-button color="primary">儲存</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()">儲存</button>
     </div>
 
   </div>
+
+
+
 
 </div>

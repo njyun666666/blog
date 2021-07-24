@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const modules = [
   MatToolbarModule,
@@ -29,7 +30,8 @@ const modules = [
   MatFormFieldModule,
   MatCheckboxModule,
   MatRadioModule,
-  MatSelectModule
+  MatSelectModule,
+  MatSnackBarModule
 ]
 
 @NgModule({
