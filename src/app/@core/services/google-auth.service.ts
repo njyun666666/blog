@@ -228,7 +228,7 @@ export class GoogleAuthService {
 
   refreshAuthToken() {
 
-    // console.log(this.auth2);
+    console.log('refreshAuthToken');
 
 
 
@@ -237,7 +237,7 @@ export class GoogleAuthService {
       // this.auth2.reloadAuthResponse()
       gapi.auth2.getAuthInstance().currentUser.get().reloadAuthResponse().then((response) => {
 
-        // console.log(response);
+        console.log(response);
         this.setUserProfile();
         // console.log(this.googleUser);
 

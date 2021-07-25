@@ -79,7 +79,41 @@ export class LoginService {
     this.router.navigate(['/']);
   }
 
+  /**檢查登入 */
   isLogin(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+
+      // 先檢查前端登入
+      this.frontIsLogin().then(() => {
+
+
+        // 檢查token
+        this.loginCheckAPI().toPromise().then(() => {
+          // console.log('---  loginCheckAPI()');
+
+          this.isLogin$.next(true);
+          resolve(true);
+
+        }).catch((err) => {
+          // console.log('---  loginCheckAPI()', err);
+          this.cleanLoginToken();
+          reject(false);
+        });
+
+
+      })
+        .catch((err) => {
+          // console.log('googleAuthService.isSignedIn()', err);
+          this.cleanLoginToken();
+          reject(false);
+        });
+
+    });
+  }
+
+
+  /**檢查前端登入 */
+  frontIsLogin(): Promise<boolean> {
     return new Promise((resolve, reject) => {
 
       // 先檢查google sign
@@ -89,18 +123,7 @@ export class LoginService {
           const token = this.jwtService.getToken();
           if (token) {
 
-            // 檢查token
-            this.loginCheckAPI().toPromise().then(() => {
-              // console.log('---  loginCheckAPI()');
-
-              this.isLogin$.next(true);
-              resolve(true);
-
-            }).catch((err) => {
-              // console.log('---  loginCheckAPI()', err);
-              this.cleanLoginToken();
-              reject(false);
-            });
+            resolve(true);
 
           } else {
             this.cleanLoginToken();
@@ -117,6 +140,9 @@ export class LoginService {
     });
   }
 
+
+
+  /**檢查 token */
   loginCheckAPI() {
     return this.apiService.post('/Login/Check');
   }

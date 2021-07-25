@@ -1,6 +1,9 @@
 import { SettingsService } from './../../../@core/services/settings.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NoticeService } from 'src/app/@core/services/notice.service';
+import { NoticeStatusEnum } from 'src/app/@core/enum/notice-status.enum';
+import { CodeEnum } from 'src/app/@core/enum/code.Enum';
 
 @Component({
   selector: 'app-blog-setting',
@@ -25,7 +28,8 @@ export class BlogSettingComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private noticeService: NoticeService
   ) { }
 
 
@@ -48,10 +52,17 @@ export class BlogSettingComponent implements OnInit {
     this.settingsService.edit(this.form.value).subscribe((data) => {
 
       console.log(data);
+
+      if (data.code == CodeEnum.success) {
+        this.noticeService.message('修改成功');
+      } else {
+        this.noticeService.message('失敗: ' + data.message, NoticeStatusEnum.error);
+      }
+
       this.isSubmit = false;
     },
       (error) => {
-        console.log('error', error);
+        this.noticeService.message('失敗', NoticeStatusEnum.error);
         this.isSubmit = false;
       });
 

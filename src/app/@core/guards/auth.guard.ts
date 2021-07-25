@@ -1,3 +1,4 @@
+import { LoginService } from './../services/login.service';
 import { AuthService } from './../services/auth.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, RouterStateSnapshot, UrlTree } from '@angular/router';
@@ -9,7 +10,8 @@ import { Observable } from 'rxjs';
 export class AuthGuard implements CanActivate, CanActivateChild {
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private loginService: LoginService
   ) { }
 
 
@@ -35,13 +37,43 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     return new Promise((resolve, reject) => {
       const role = route.data.role;
 
-      this.authService.authCheck(role).toPromise().then(() => {
 
-        resolve(true);
+
+      // 檢查前端登入
+      this.loginService.frontIsLogin().then((check) => {
+        // console.log('----------doCanActivate  checkFrontEndLogin', check);
+        // console.log(check);
+
+        if (check) {
+          // console.log('----------doCanActivate  resolve(true)', true);
+
+          this.authService.authCheck(role).toPromise().then(() => {
+
+            resolve(true);
+
+          }).catch(() => {
+            reject(false);
+          });
+
+
+        } else {
+          this.loginService.noLoginRedirect();
+          reject(false);
+        }
+
+
+
 
       }).catch(() => {
+        console.log('----------doCanActivate checkFrontEndLogin catch  reject', false);
+
+        this.loginService.noLoginRedirect();
         reject(false);
       });
+
+
+
+
 
     });
 
