@@ -37,4 +37,8 @@ export class NoticeMessageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  close() {
+    this.data.snackBar.dismiss();
+  }
+
 }

@@ -51,7 +51,7 @@ export class BlogSettingComponent implements OnInit {
 
     this.settingsService.edit(this.form.value).subscribe((data) => {
 
-      console.log(data);
+      // console.log(data);
 
       if (data.code == CodeEnum.success) {
         this.noticeService.message('修改成功');

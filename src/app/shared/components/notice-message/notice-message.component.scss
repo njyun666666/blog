@@ -4,4 +4,21 @@
   .notice-message-icon {
     margin-right: 10px;
   }
+
+  .notice-content {
+    flex: 1;
+  }
+
+  .notice-close {
+    margin: -8px -8px -8px 8px;
+
+    button {
+      min-width: auto;
+      padding: 0 8px;
+
+      .notice-close-icon {
+        opacity: 0.3;
+      }
+    }
+  }
 }

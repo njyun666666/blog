@@ -9,16 +9,16 @@ import { NoticeStatusEnum } from '../enum/notice-status.enum';
 export class NoticeService {
 
   constructor(
-    private _snackBar: MatSnackBar
+    private snackBar: MatSnackBar
   ) { }
 
 
   message(message: string, status?: NoticeStatusEnum) {
-    this._snackBar.openFromComponent(NoticeMessageComponent, {
+    this.snackBar.openFromComponent(NoticeMessageComponent, {
       horizontalPosition: 'right',
       verticalPosition: 'top',
-      duration: 1000,
-      data: { message, status }
+      duration: 1500,
+      data: { message, status, snackBar: this.snackBar }
     });
   }
 

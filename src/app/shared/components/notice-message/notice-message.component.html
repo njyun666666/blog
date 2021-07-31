@@ -1,11 +1,17 @@
 <div class="notice-message-container">
 
   <div class="notice-message-icon">
-    <i class="{{icon}}" color="primary"></i>
+    <i class="{{icon}}"></i>
   </div>
 
-  <div>
+  <div class="notice-content">
     {{data.message}}
+  </div>
+
+  <div class="notice-close">
+    <button mat-button title="關閉" (click)="close()">
+      <mat-icon class="notice-close-icon">close</mat-icon>
+    </button>
   </div>
 
 </div>
