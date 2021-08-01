@@ -32,7 +32,9 @@ export class LoadingDirective implements OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.componentInstance.destroy();
+    if (this.componentInstance) {
+      this.componentInstance.destroy();
+    }
   }
 
 
