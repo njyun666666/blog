@@ -13,6 +13,9 @@ export class LoginComponent implements OnInit {
   user!: GoogleBasicProfile;
   isLogin: boolean = false;
 
+  logging_in: boolean = false;
+
+
   constructor(
     private googleAuthService: GoogleAuthService,
     private loginService: LoginService
@@ -27,6 +30,7 @@ export class LoginComponent implements OnInit {
     this.loginService.isLogin$.subscribe((data) => {
       this.user = this.googleAuthService.googleUser;
       this.isLogin = data;
+      this.logging_in = false;
     });
 
 
@@ -35,10 +39,12 @@ export class LoginComponent implements OnInit {
 
 
   login() {
+    this.logging_in = true;
     this.loginService.login();
   }
 
   logout() {
+    this.logging_in = false;
     this.loginService.logout();
   }
 

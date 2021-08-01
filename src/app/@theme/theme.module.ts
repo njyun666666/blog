@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { MaterialModule } from '../shared/modules/material.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -23,6 +24,7 @@ const components = [
   imports: [
     CommonModule,
     RouterModule,
+    SharedModule,
     MaterialModule
   ],
   exports: [

@@ -1,6 +1,8 @@
 <ng-container *ngIf="!isLogin; else elseTemplate">
 
-  <button (click)="login()" mat-icon-button>
+  <button class="btn-login" [appLoading]="logging_in" appLoadingColor="accent" [disabled]="logging_in" (click)="login()" mat-button
+    title="Google登入">
+    <img src="/assets/images/googleg_standard_color_128dp.png" alt="">
     登入
   </button>
 
