@@ -6,8 +6,6 @@
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
-
-
       <div class="row mb-3">
 
         <mat-form-field appearance="fill" class="col">
@@ -41,6 +39,8 @@
 {{form.value|json}}
   </pre> -->
 
+
+
   </div>
 
 
@@ -51,7 +51,8 @@
     </div>
 
     <div class="page-footer-right">
-      <button mat-raised-button color="primary" (click)="onSubmit()">儲存</button>
+      <button mat-raised-button color="primary" [appLoading]="isSubmit" [disabled]="isSubmit"
+        (click)="onSubmit()">儲存</button>
     </div>
 
   </div>

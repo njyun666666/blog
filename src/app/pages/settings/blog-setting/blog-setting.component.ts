@@ -1,14 +1,14 @@
 import { SettingsService } from './../../../@core/services/settings.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NoticeService } from 'src/app/@core/services/notice.service';
 import { NoticeStatusEnum } from 'src/app/@core/enum/notice-status.enum';
-import { CodeEnum } from 'src/app/@core/enum/code.Enum';
+import { CodeEnum } from 'src/app/@core/enum/code.enum';
 
 @Component({
   selector: 'app-blog-setting',
   templateUrl: './blog-setting.component.html',
-  styleUrls: ['./blog-setting.component.scss']
+  styleUrls: ['./blog-setting.component.scss'],
 })
 export class BlogSettingComponent implements OnInit {
 
@@ -24,8 +24,6 @@ export class BlogSettingComponent implements OnInit {
     return this.form.get('title') as FormControl;
   }
 
-
-
   constructor(
     private fb: FormBuilder,
     private settingsService: SettingsService,
@@ -35,11 +33,13 @@ export class BlogSettingComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     this.settingsService.get().subscribe((data) => {
       this.form.patchValue(data);
     });
 
   }
+
 
   onSubmit() {
 
