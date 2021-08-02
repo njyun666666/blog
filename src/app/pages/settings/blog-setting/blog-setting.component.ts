@@ -1,3 +1,4 @@
+import { ThemeService } from './../../../@core/services/theme.service';
 import { SettingsService } from './../../../@core/services/settings.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -27,7 +28,8 @@ export class BlogSettingComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private settingsService: SettingsService,
-    private noticeService: NoticeService
+    private noticeService: NoticeService,
+    private themeService: ThemeService
   ) { }
 
 
@@ -55,6 +57,8 @@ export class BlogSettingComponent implements OnInit {
 
       if (data.code == CodeEnum.success) {
         this.noticeService.message('修改成功');
+        this.themeService.toolbarTitle$.next(this.title.value);
+
       } else {
         this.noticeService.message('失敗: ' + data.message, NoticeStatusEnum.error);
       }

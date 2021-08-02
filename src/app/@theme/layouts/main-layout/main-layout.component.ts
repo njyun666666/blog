@@ -1,3 +1,4 @@
+import { ThemeService } from './../../../@core/services/theme.service';
 import { MenuService } from './../../../@core/services/menu.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
@@ -13,15 +14,17 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   fillerNav = [];
   sidebarOpened = true;
 
+  toolbarTitle!: string;
   menuList: MenuModel[];
 
   private _mobileQueryListener: () => void;
 
 
   constructor(
-    changeDetectorRef: ChangeDetectorRef,
-    media: MediaMatcher,
-    menuService: MenuService
+    private changeDetectorRef: ChangeDetectorRef,
+    private media: MediaMatcher,
+    private menuService: MenuService,
+    private themeService: ThemeService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
 
@@ -35,6 +38,13 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
 
 
     this.menuList = menuService.menuList;
+
+
+
+    themeService.toolbarTitle$.subscribe((data) => {
+      this.toolbarTitle = data;
+    });
+
 
   }
 
