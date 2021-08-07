@@ -2,67 +2,53 @@
 
 
   <div class="page-content">
-    <p>articles-type works!</p>
 
 
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
-    <p>1</p>
+    <div class="row mb-3">
+      <div class="col">
+
+        <app-articles-type-form (getEmitter)="get()"></app-articles-type-form>
+
+      </div>
+    </div>
+
+
+    <mat-nav-list>
+
+      <mat-list-item *ngFor="let item of typeList">
+        <div matLine>
+
+          <span *ngIf="!item.isEdit">
+            {{item.name}}
+          </span>
+
+          <mat-form-field class="w-100" *ngIf="item.isEdit">
+            <input matInput type="text" [(ngModel)]="item.name">
+          </mat-form-field>
+
+        </div>
+
+
+        <button mat-icon-button title="修改" *ngIf="!item.isEdit" (click)="edit(item)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button title="刪除" *ngIf="!item.isEdit" (click)="delete(item)">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+        <button mat-icon-button color="accent" title="儲存" *ngIf="item.isEdit" [appLoading]="item.isSubmit"
+          [disabled]="item.isSubmit" (click)="save(item)">
+          <mat-icon>save</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" title="取消" *ngIf="item.isEdit" (click)="cancel(item)">
+          <mat-icon>clear</mat-icon>
+        </button>
+
+      </mat-list-item>
+
+    </mat-nav-list>
+
+
 
 
   </div>

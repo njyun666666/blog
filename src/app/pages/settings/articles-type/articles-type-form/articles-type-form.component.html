@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
+  <mat-form-field appearance="fill" class="me-3">
+    <mat-label>類型名稱</mat-label>
+    <input matInput formControlName="name">
+    <mat-error *ngIf="name.hasError('required')">
+      請輸入類型名稱
+    </mat-error>
+
+  </mat-form-field>
+
+  <button type="submit" mat-raised-button color="primary" [appLoading]="isSubmit" [disabled]="isSubmit">新增</button>
+
+
+
+</form>
