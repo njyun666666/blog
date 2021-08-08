@@ -13,3 +13,6 @@ export interface ArticleTypeEditModel {
   id: number;
   name: string;
 }
+export interface ArticleTypeDeleteModel {
+  id: number;
+}

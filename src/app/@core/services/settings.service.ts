@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { Injectable } from '@angular/core';
 import { SettingsModel } from '../models/settings/settings.model';
-import { ArticleTypeAddModel, ArticleTypeEditModel, ArticleTypeModel } from '../models/settings/article-type.model';
+import { ArticleTypeAddModel, ArticleTypeDeleteModel, ArticleTypeEditModel, ArticleTypeModel } from '../models/settings/article-type.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,4 +34,7 @@ export class SettingsService {
     return this.apiService.post('/Settings/ArticleTypeEdit', data);
   }
 
+  deleteArticleType(data: ArticleTypeDeleteModel): Observable<any> {
+    return this.apiService.post('/Settings/ArticleTypeDelete', data);
+  }
 }

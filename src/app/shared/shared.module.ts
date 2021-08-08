@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NoticeMessageComponent } from './components/notice-message/notice-message.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { LoadingDirective } from './directive/loading.directive';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 
 
@@ -14,7 +15,8 @@ import { LoadingDirective } from './directive/loading.directive';
     NavContentComponent,
     NoticeMessageComponent,
     LoadingComponent,
-    LoadingDirective
+    LoadingDirective,
+    DialogComponent
   ],
   imports: [
     CommonModule,

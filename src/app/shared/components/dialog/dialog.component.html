@@ -1,0 +1,8 @@
+<h2 mat-dialog-title *ngIf="title!=null && title.length>0">{{title}}</h2>
+<mat-dialog-content class="mat-typography">
+  {{content}}
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>取消</button>
+  <button mat-raised-button [color]="buttonColor" [mat-dialog-close]="true" cdkFocusInitial>{{buttonText}}</button>
+</mat-dialog-actions>
