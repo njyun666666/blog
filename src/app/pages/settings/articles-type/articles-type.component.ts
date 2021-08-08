@@ -53,14 +53,13 @@ export class ArticlesTypeComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, {
       minWidth: 300,
       data: {
-        content: '確定刪除 ' + type.name + ' 嗎?',
+        content: '刪除 ' + type.name + ' 嗎?',
         button: 'warn'
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-
+      // console.log(`Dialog result: ${result}`);
 
       if (result) {
 
@@ -83,14 +82,9 @@ export class ArticlesTypeComponent implements OnInit {
 
           });
 
-        // return true;
-
       }
 
     });
-
-
-    // return false;
 
 
   }

@@ -9,7 +9,7 @@ import { NoticeStatusEnum } from 'src/app/@core/enum/notice-status.enum';
 })
 export class NoticeMessageComponent implements OnInit {
 
-  icon: string = 'fas fa-check';
+  icon: string = '';
 
   constructor(
     @Inject(MAT_SNACK_BAR_DATA) public data: any

@@ -1,11 +1,10 @@
 <div class="notice-message-container">
 
-  <div class="notice-message-icon">
+  <div class="notice-message-icon" *ngIf="icon!=null && icon.length>0">
     <i class="{{icon}}"></i>
   </div>
 
-  <div class="notice-content">
-    {{data.message}}
+  <div class="notice-content" [innerHtml]="data.message">
   </div>
 
   <div class="notice-close">
