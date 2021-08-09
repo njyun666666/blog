@@ -6,6 +6,7 @@ import { NoticeService } from 'src/app/@core/services/notice.service';
 import { NoticeStatusEnum } from 'src/app/@core/enum/notice-status.enum';
 import { ReturnCodeEnum } from 'src/app/@core/enum/return-code.enum';
 import { ReturnModel } from 'src/app/@core/models/return.model';
+import { SettingsModel } from 'src/app/@core/models/settings/settings.model';
 
 @Component({
   selector: 'app-blog-setting',
@@ -37,7 +38,7 @@ export class BlogSettingComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.settingsService.get().subscribe((data) => {
+    this.settingsService.get().subscribe((data: SettingsModel) => {
       this.form.patchValue(data);
     });
 

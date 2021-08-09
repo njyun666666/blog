@@ -1,7 +1,7 @@
 import { NoticeService } from './../../../@core/services/notice.service';
 import { SettingsService } from './../../../@core/services/settings.service';
 import { Component, OnInit } from '@angular/core';
-import { ArticleTypeEditModel, ArticleTypeModel, ArticleTypeSortModel } from 'src/app/@core/models/settings/article-type.model';
+import { ArticleTypeDeleteModel, ArticleTypeEditModel, ArticleTypeModel, ArticleTypeSortModel } from 'src/app/@core/models/settings/article-type.model';
 import { Subject } from 'rxjs';
 import { EventEmitter } from '@angular/core';
 import { ReturnCodeEnum } from 'src/app/@core/enum/return-code.enum';
@@ -65,7 +65,7 @@ export class ArticlesTypeComponent implements OnInit {
 
       if (result) {
 
-        const data = { id: type.id };
+        const data: ArticleTypeDeleteModel = { id: type.id };
 
         this.settingsService.deleteArticleType(data).subscribe((data: ReturnModel) => {
 
@@ -130,8 +130,6 @@ export class ArticlesTypeComponent implements OnInit {
   drop(event: CdkDragDrop<string[]>) {
     // console.log(event);
     moveItemInArray(this.typeList, event.previousIndex, event.currentIndex);
-
-    // console.log(this.typeList.map(x => x.id));
 
     const data: ArticleTypeSortModel = { ids: this.typeList.map(x => x.id) };
 

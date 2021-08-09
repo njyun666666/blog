@@ -19,7 +19,7 @@ export class SettingsService {
     return this.apiService.post('/Settings/Get');
   }
 
-  edit(data: SettingsModel) {
+  edit(data: SettingsModel): Observable<ReturnModel> {
     return this.apiService.post('/Settings/Edit', data);
   }
 
@@ -42,4 +42,5 @@ export class SettingsService {
   editArticleTypeSort(data: ArticleTypeSortModel): Observable<ReturnModel> {
     return this.apiService.post('/Settings/ArticleTypeSortEdit', data);
   }
+
 }
