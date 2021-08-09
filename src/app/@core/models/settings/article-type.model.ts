@@ -16,3 +16,6 @@ export interface ArticleTypeEditModel {
 export interface ArticleTypeDeleteModel {
   id: number;
 }
+export interface ArticleTypeSortModel {
+  ids: number[];
+}

@@ -4,7 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { NoticeService } from 'src/app/@core/services/notice.service';
 import { NoticeStatusEnum } from 'src/app/@core/enum/notice-status.enum';
-import { CodeEnum } from 'src/app/@core/enum/code.enum';
+import { ReturnCodeEnum } from 'src/app/@core/enum/return-code.enum';
+import { ReturnModel } from 'src/app/@core/models/return.model';
 
 @Component({
   selector: 'app-blog-setting',
@@ -51,12 +52,12 @@ export class BlogSettingComponent implements OnInit {
     this.isSubmit = true;
 
 
-    this.settingsService.edit(this.form.value).subscribe((data) => {
+    this.settingsService.edit(this.form.value).subscribe((data: ReturnModel) => {
 
       // console.log(data);
 
-      if (data.code == CodeEnum.success) {
-        this.noticeService.message('修改成功');
+      if (data.code == ReturnCodeEnum.success) {
+        this.noticeService.message('修改成功', NoticeStatusEnum.success);
         this.themeService.toolbarTitle$.next(this.title.value);
 
       } else {

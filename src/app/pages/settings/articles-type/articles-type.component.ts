@@ -1,13 +1,15 @@
 import { NoticeService } from './../../../@core/services/notice.service';
 import { SettingsService } from './../../../@core/services/settings.service';
 import { Component, OnInit } from '@angular/core';
-import { ArticleTypeEditModel, ArticleTypeModel } from 'src/app/@core/models/settings/article-type.model';
+import { ArticleTypeEditModel, ArticleTypeModel, ArticleTypeSortModel } from 'src/app/@core/models/settings/article-type.model';
 import { Subject } from 'rxjs';
 import { EventEmitter } from '@angular/core';
-import { CodeEnum } from 'src/app/@core/enum/code.enum';
+import { ReturnCodeEnum } from 'src/app/@core/enum/return-code.enum';
 import { NoticeStatusEnum } from 'src/app/@core/enum/notice-status.enum';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { ReturnModel } from 'src/app/@core/models/return.model';
 
 
 @Component({
@@ -65,10 +67,10 @@ export class ArticlesTypeComponent implements OnInit {
 
         const data = { id: type.id };
 
-        this.settingsService.deleteArticleType(data).subscribe((data) => {
+        this.settingsService.deleteArticleType(data).subscribe((data: ReturnModel) => {
 
-          if (data.code == CodeEnum.success) {
-            this.noticeService.message('已刪除');
+          if (data.code == ReturnCodeEnum.success) {
+            this.noticeService.message('已刪除', NoticeStatusEnum.success);
 
             this.get();
 
@@ -97,10 +99,10 @@ export class ArticlesTypeComponent implements OnInit {
     type.isSubmit = true;
 
     const data: ArticleTypeEditModel = { id: type.id, name: type.name };
-    this.settingsService.editArticleType(data).subscribe((data) => {
+    this.settingsService.editArticleType(data).subscribe((data: ReturnModel) => {
 
-      if (data.code == CodeEnum.success) {
-        this.noticeService.message('修改成功');
+      if (data.code == ReturnCodeEnum.success) {
+        this.noticeService.message('修改成功', NoticeStatusEnum.success);
 
         type.o_name = type.name;
         type.isEdit = false;
@@ -125,5 +127,27 @@ export class ArticlesTypeComponent implements OnInit {
     type.isEdit = false;
   }
 
+  drop(event: CdkDragDrop<string[]>) {
+    // console.log(event);
+    moveItemInArray(this.typeList, event.previousIndex, event.currentIndex);
+
+    // console.log(this.typeList.map(x => x.id));
+
+    const data: ArticleTypeSortModel = { ids: this.typeList.map(x => x.id) };
+
+    this.settingsService.editArticleTypeSort(data).subscribe((data: ReturnModel) => {
+
+      if (data.code == ReturnCodeEnum.success) {
+        this.noticeService.message('修改成功', NoticeStatusEnum.success);
+
+      } else {
+        this.noticeService.message('失敗: ' + data.message, NoticeStatusEnum.error);
+      }
+
+    },
+      (error) => {
+        this.noticeService.message('失敗', NoticeStatusEnum.error);
+      });
+  }
 
 }

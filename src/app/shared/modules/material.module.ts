@@ -16,6 +16,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const modules = [
   MatToolbarModule,
@@ -33,7 +34,8 @@ const modules = [
   MatRadioModule,
   MatSelectModule,
   MatSnackBarModule,
-  MatDialogModule
+  MatDialogModule,
+  DragDropModule
 ]
 
 @NgModule({

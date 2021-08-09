@@ -2,8 +2,9 @@ import { NoticeService } from './../../../../@core/services/notice.service';
 import { SettingsService } from './../../../../@core/services/settings.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { CodeEnum } from 'src/app/@core/enum/code.enum';
+import { ReturnCodeEnum } from 'src/app/@core/enum/return-code.enum';
 import { NoticeStatusEnum } from 'src/app/@core/enum/notice-status.enum';
+import { ReturnModel } from 'src/app/@core/models/return.model';
 
 @Component({
   selector: 'app-articles-type-form',
@@ -42,11 +43,11 @@ export class ArticlesTypeFormComponent implements OnInit {
     this.isSubmit = true;
 
 
-    this.settingsService.addArticleType(this.form.value).subscribe((data) => {
+    this.settingsService.addArticleType(this.form.value).subscribe((data: ReturnModel) => {
 
       // console.log(data);
 
-      if (data.code == CodeEnum.success) {
+      if (data.code == ReturnCodeEnum.success) {
         this.noticeService.message('新增成功');
 
         this.getEmitter.emit();
