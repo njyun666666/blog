@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { GoogleAuthService } from './../services/google-auth.service';
 import { JwtService } from './../services/jwt.service';
 import { Injectable } from '@angular/core';
@@ -18,6 +19,11 @@ export class TokenInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+    // 非後端api不加token
+    if (request.url.indexOf(environment.api_url) !== 0) {
+      return next.handle(request);
+    }
 
     let newRequest = request.clone();
 
