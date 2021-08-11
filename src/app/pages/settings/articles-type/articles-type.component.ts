@@ -129,23 +129,27 @@ export class ArticlesTypeComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     // console.log(event);
-    moveItemInArray(this.typeList, event.previousIndex, event.currentIndex);
+    if (event.previousIndex !== event.currentIndex) {
 
-    const data: ArticleTypeSortModel = { ids: this.typeList.map(x => x.id) };
+      moveItemInArray(this.typeList, event.previousIndex, event.currentIndex);
 
-    this.settingsService.editArticleTypeSort(data).subscribe((data: ReturnModel) => {
+      const data: ArticleTypeSortModel = { ids: this.typeList.map(x => x.id) };
 
-      if (data.code == ReturnCodeEnum.success) {
-        this.noticeService.message('修改成功', NoticeStatusEnum.success);
+      this.settingsService.editArticleTypeSort(data).subscribe((data: ReturnModel) => {
 
-      } else {
-        this.noticeService.message('失敗: ' + data.message, NoticeStatusEnum.error);
-      }
+        if (data.code == ReturnCodeEnum.success) {
+          this.noticeService.message('修改成功', NoticeStatusEnum.success);
 
-    },
-      (error) => {
-        this.noticeService.message('失敗', NoticeStatusEnum.error);
-      });
+        } else {
+          this.noticeService.message('失敗: ' + data.message, NoticeStatusEnum.error);
+        }
+
+      },
+        (error) => {
+          this.noticeService.message('失敗', NoticeStatusEnum.error);
+        });
+    }
+
   }
 
 }
