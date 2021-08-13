@@ -1,12 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-export interface DialogData {
-  title: string;
-  content: string;
-  button: 'accent' | 'warn';
-}
-
+import { DialogModel } from 'src/app/@core/models/dialog.model';
 
 @Component({
   selector: 'app-dialog',
@@ -15,34 +9,25 @@ export interface DialogData {
 })
 export class DialogComponent implements OnInit {
 
-  title: string = '';
-  content: string = '';
-  buttonText: string = '確認';
-  buttonColor: string = 'accent';
+  model: DialogModel = {
+    title: '',
+    content: '',
+    buttonText: '確定',
+    buttonColor: 'primary',
+    showCancelBtn: true
+  };
+
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: DialogModel
   ) { }
 
   ngOnInit(): void {
-    console.log(this.data);
-    this.title = this.data.title;
-    this.content = this.data.content;
+    // console.log(this.data);
 
-    switch (this.data.button) {
-      case 'accent':
-        this.buttonText = '確認';
-        this.buttonColor = 'accent';
-        break;
-      case 'warn':
-        this.buttonText = '刪除';
-        this.buttonColor = 'warn';
-        break;
+    this.model = Object.assign(this.model, this.data);
 
-      default:
 
-        break;
-    };
   }
 
 }

@@ -1,3 +1,4 @@
+import { DialogService } from './../../../@core/services/dialog.service';
 import { NoticeService } from './../../../@core/services/notice.service';
 import { SettingsService } from './../../../@core/services/settings.service';
 import { Component, OnInit } from '@angular/core';
@@ -56,7 +57,8 @@ export class ArticlesTypeComponent implements OnInit {
       minWidth: 300,
       data: {
         content: '刪除 ' + type.name + ' 嗎?',
-        button: 'warn'
+        buttonText: '刪除',
+        buttonColor: 'warn'
       }
     });
 
