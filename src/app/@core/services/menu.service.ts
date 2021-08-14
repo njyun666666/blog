@@ -8,9 +8,6 @@ import { MenuModel } from '../models/menu.model';
 })
 export class MenuService {
 
-  menuList!: MenuModel[];
-
-
   constructor(
     private apiService: ApiService
   ) { }

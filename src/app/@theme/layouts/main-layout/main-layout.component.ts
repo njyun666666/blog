@@ -14,8 +14,8 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   fillerNav = [];
   sidebarOpened = true;
 
-  toolbarTitle!: string;
-  menuList: MenuModel[];
+  toolbarTitle: string = '';
+  menuList: MenuModel[] = [];
 
   private _mobileQueryListener: () => void;
 
@@ -37,14 +37,15 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
     this.mobileQuery.addListener(this._mobileQueryListener);
 
 
-    this.menuList = menuService.menuList;
-
-
-
     themeService.toolbarTitle$.subscribe((data) => {
       this.toolbarTitle = data;
     });
 
+    themeService.sidebarMenu$.subscribe((data) => {
+      this.menuList = data;
+    });
+
+    themeService.getThemeData({ account: '', self: 0 });
 
   }
 

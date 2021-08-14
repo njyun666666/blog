@@ -1,6 +1,5 @@
-import { MenuService } from './../../@core/services/menu.service';
 import { Component, OnInit } from '@angular/core';
-import { MenuModel } from 'src/app/@core/models/menu.model';
+import { ThemeService } from 'src/app/@core/services/theme.service';
 
 @Component({
   selector: 'app-settings',
@@ -13,7 +12,7 @@ export class SettingsComponent implements OnInit {
 
 
   constructor(
-    private menuService: MenuService
+    private themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
