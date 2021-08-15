@@ -3,6 +3,7 @@ import { MenuService } from './../../../@core/services/menu.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuModel } from 'src/app/@core/models/menu.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-main-layout',
@@ -24,7 +25,8 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     private media: MediaMatcher,
     private menuService: MenuService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private route: ActivatedRoute
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
 
@@ -45,7 +47,8 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
       this.menuList = data;
     });
 
-    themeService.getThemeData({ account: '', self: 0 });
+    // themeService.getThemeData({ account: '', self: 0 });
+
 
   }
 

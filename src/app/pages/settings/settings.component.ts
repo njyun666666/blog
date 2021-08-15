@@ -17,7 +17,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    this.themeService.getThemeData({ self: 1 });
 
   }
 

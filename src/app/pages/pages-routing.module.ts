@@ -1,5 +1,5 @@
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginGuard } from './../@core/guards/login.guard';
-import { LoginCheckGuard } from '../@core/guards/login-check.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PagesComponent } from './pages.component';
@@ -10,9 +10,18 @@ const routes: Routes = [{
   component: PagesComponent,
   canActivate: [LoginGuard],
   children: [
-    { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
-    { path: 'dashbord', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+    // { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
     { path: 'settings', canActivate: [AuthGuard], data: { role: 'Blogger' }, loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) },
+    { path: '404', component: PageNotFoundComponent },
+    { path: 'articles', loadChildren: () => import('./articles/articles.module').then(m => m.ArticlesModule) },
+    { path: ':account/:article_id', loadChildren: () => import('./articles/articles.module').then(m => m.ArticlesModule) },
+
+    // blog index
+    { path: 'i', redirectTo: '' },
+    { path: ':account', loadChildren: () => import('./index/index.module').then(m => m.IndexModule) },
+    { path: '', loadChildren: () => import('./index/index.module').then(m => m.IndexModule) },
+
+    { path: '**', component: PageNotFoundComponent },
   ]
 }];
 
