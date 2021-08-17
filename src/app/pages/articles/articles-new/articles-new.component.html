@@ -1,1 +1,89 @@
-<p>articles-new works!</p>
+<div class="page-container">
+
+  <div class="page-content">
+
+
+    <div class="container">
+
+      <form [formGroup]="form">
+
+
+
+        <div class="row">
+          <div class="col">
+            <h1>發文</h1>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            分類
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+            標題
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="w-100">
+              <!-- <mat-label>Input</mat-label> -->
+              <input matInput>
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col">
+            內容
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <!-- <textarea #contentDOM></textarea> -->
+            <div id="vditor"></div>
+
+          </div>
+        </div>
+
+
+      </form>
+
+    </div>
+
+
+    <pre>
+{{form.value|json}}
+</pre>
+
+
+
+
+  </div>
+
+
+  <div class="page-footer">
+
+    <div class="page-footer-left">
+    </div>
+
+    <div class="page-footer-right">
+      <button mat-raised-button color="accent" [appLoading]="isSubmit" [disabled]="isSubmit"
+        (click)="onSubmit()">儲存草稿</button>
+      <button mat-raised-button color="primary" [appLoading]="isSubmit" [disabled]="isSubmit"
+        (click)="onSubmit()">發文</button>
+    </div>
+
+  </div>
+
+
+</div>

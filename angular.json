@@ -37,6 +37,7 @@
               "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "src/app/@theme/styles/custom.scss",
               "src/app/@theme/styles/custom-dark.scss",
+              "./node_modules/vditor/src/assets/scss/index.scss",
               "src/styles.scss"
             ],
             "scripts": [
