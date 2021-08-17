@@ -20,6 +20,9 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    // console.log('TokenInterceptor');
+    // return next.handle(request);
+
     // 非後端api不加token
     if (request.url.indexOf(environment.api_url) !== 0) {
       return next.handle(request);
@@ -27,7 +30,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     let newRequest = request.clone();
 
-    if (this.googleAuthService.googleUser) {
+    if (this.googleAuthService.googleUser.id_token) {
       newRequest = newRequest.clone({ setHeaders: { gtoken: this.googleAuthService.googleUser.id_token } });
     }
 

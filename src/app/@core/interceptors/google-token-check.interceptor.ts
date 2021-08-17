@@ -18,9 +18,10 @@ export class GoogleTokenCheckInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    return from(this.googleAuthService.isSignedIn()).pipe(
+    // 有登入檢查google token過期& refresh token
+    return from(this.googleAuthService.isSignedIn().catch(() => { return true; })).pipe(
       switchMap(check => {
-        // console.log(check);
+        // console.log('check:', check);
         return next.handle(request);
       }));
 
