@@ -76,7 +76,7 @@ export class ArticlesTypeComponent implements OnInit {
 
         const data: ArticleTypeDeleteModel = { id: type.id }
 
-        this.settingsService.deleteArticleType(data).subscribe((data: ReturnModel) => {
+        this.settingsService.deleteArticleType(data).subscribe((data: ReturnModel<any>) => {
 
           if (data.code == ReturnCodeEnum.success) {
             this.noticeService.message('已刪除', NoticeStatusEnum.success)
@@ -108,7 +108,7 @@ export class ArticlesTypeComponent implements OnInit {
     type.isSubmit = true
 
     const data: ArticleTypeEditModel = { id: type.id, name: type.name }
-    this.settingsService.editArticleType(data).subscribe((data: ReturnModel) => {
+    this.settingsService.editArticleType(data).subscribe((data: ReturnModel<any>) => {
 
       if (data.code == ReturnCodeEnum.success) {
         this.noticeService.message('修改成功', NoticeStatusEnum.success)
@@ -134,8 +134,8 @@ export class ArticlesTypeComponent implements OnInit {
   }
 
   cancel(type: ArticleTypeModel) {
-    type.name = type.o_name
-    type.isEdit = false
+    type.name = type.o_name;
+    type.isEdit = false;
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -146,7 +146,7 @@ export class ArticlesTypeComponent implements OnInit {
 
       const data: ArticleTypeSortModel = { ids: this.typeList.map(x => x.id) }
 
-      this.settingsService.editArticleTypeSort(data).subscribe((data: ReturnModel) => {
+      this.settingsService.editArticleTypeSort(data).subscribe((data: ReturnModel<any>) => {
 
         if (data.code == ReturnCodeEnum.success) {
           this.noticeService.message('修改成功', NoticeStatusEnum.success);

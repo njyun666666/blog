@@ -15,38 +15,50 @@
           </div>
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col">
             分類
           </div>
-        </div>
+        </div> -->
         <div class="row">
           <div class="col">
 
+            <mat-form-field appearance="fill" class="me-3">
+              <mat-label>分類</mat-label>
+              <mat-select>
+                <mat-option *ngFor="let item of typeList" [value]="item.id">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+            <button mat-raised-button type="button" color='primary' (click)="addType()">新增分類</button>
           </div>
+
         </div>
 
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col">
             標題
           </div>
-        </div>
+        </div> -->
         <div class="row">
           <div class="col">
-            <mat-form-field appearance="outline" class="w-100">
-              <!-- <mat-label>Input</mat-label> -->
+            <mat-form-field appearance="fill" class="w-100">
+              <mat-label>標題</mat-label>
               <input matInput>
             </mat-form-field>
           </div>
         </div>
 
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col">
             內容
           </div>
-        </div>
+        </div> -->
         <div class="row">
           <div class="col">
             <!-- <textarea #contentDOM></textarea> -->

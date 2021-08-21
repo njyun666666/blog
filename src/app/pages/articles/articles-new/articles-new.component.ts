@@ -1,3 +1,5 @@
+import { ArticleTypeModel } from './../../../@core/models/settings/article-type.model';
+import { SettingsService } from './../../../@core/services/settings.service';
 import { GoogleAuthService } from './../../../@core/services/google-auth.service';
 import { JwtService } from './../../../@core/services/jwt.service';
 import { environment } from './../../../../environments/environment';
@@ -5,9 +7,8 @@ import { ThemeService } from 'src/app/@core/services/theme.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import Vditor from 'vditor';
-// import * as SimpleMDE from 'simplemde';
-// import * as SimpleMDE from 'simplemde';
-// import { Element } from '@angular/compiler';
+import { MatDialog } from '@angular/material/dialog';
+import { ArticlesTypeFormComponent } from '../../settings/articles-type/articles-type-form/articles-type-form.component';
 
 @Component({
   selector: 'app-articles-new',
@@ -16,12 +17,10 @@ import Vditor from 'vditor';
 })
 export class ArticlesNewComponent implements OnInit, AfterViewInit {
 
-  // @ViewChild('contentDOM') contentDOM!: ElementRef;
-  // simplemde!: SimpleMDE;
 
+  typeList: ArticleTypeModel[] = []
   vditor!: Vditor;
 
-  // = new SimpleMDE({ element: this.contentDOM });
   isSubmit: boolean = false;
 
   form = this.fb.group({
@@ -35,12 +34,21 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private themeService: ThemeService,
     private jwtService: JwtService,
-    private googleAuthService: GoogleAuthService
+    private googleAuthService: GoogleAuthService,
+    private settingsService: SettingsService,
+    public dialog: MatDialog
   ) { }
 
 
   ngOnInit(): void {
     this.themeService.getThemeData({ self: 1 });
+
+
+    this.settingsService.getArticleType().subscribe((data: ArticleTypeModel[]) => {
+      this.typeList = data;
+    });
+
+
 
     const token = this.jwtService.getToken();
     const gtoken = this.googleAuthService.googleUser.id_token;
@@ -90,7 +98,6 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
       },
       after: () => {
         this.vditor.setTheme('dark', 'dark');
-        this.vditor.setValue('Hello, Vditor + Angular!');
       }
     });
 
@@ -102,6 +109,21 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
 
   }
+
+
+  addType() {
+    const dialogRef = this.dialog.open(ArticlesTypeFormComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result !== undefined && result != null && result.id > 0) {
+        this.typeList.push(result);
+        this.typeList = Object.assign([], this.typeList);
+      }
+
+    });
+  }
+
 
   onSubmit() {
 

@@ -53,7 +53,7 @@ export class BlogSettingComponent implements OnInit {
     this.isSubmit = true;
 
 
-    this.settingsService.edit(this.form.value).subscribe((data: ReturnModel) => {
+    this.settingsService.edit(this.form.value).subscribe((data: ReturnModel<any>) => {
 
       // console.log(data);
 

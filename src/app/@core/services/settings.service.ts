@@ -19,7 +19,7 @@ export class SettingsService {
     return this.apiService.post('/Settings/Get');
   }
 
-  edit(data: SettingsModel): Observable<ReturnModel> {
+  edit(data: SettingsModel): Observable<ReturnModel<any>> {
     return this.apiService.post('/Settings/Edit', data);
   }
 
@@ -27,19 +27,19 @@ export class SettingsService {
     return this.apiService.post('/Settings/ArticleTypeGet');
   }
 
-  addArticleType(data: ArticleTypeAddModel): Observable<ReturnModel> {
+  addArticleType(data: ArticleTypeAddModel): Observable<ReturnModel<number>> {
     return this.apiService.post('/Settings/ArticleTypeAdd', data);
   }
 
-  editArticleType(data: ArticleTypeEditModel): Observable<ReturnModel> {
+  editArticleType(data: ArticleTypeEditModel): Observable<ReturnModel<any>> {
     return this.apiService.post('/Settings/ArticleTypeEdit', data);
   }
 
-  deleteArticleType(data: ArticleTypeDeleteModel): Observable<ReturnModel> {
+  deleteArticleType(data: ArticleTypeDeleteModel): Observable<ReturnModel<any>> {
     return this.apiService.post('/Settings/ArticleTypeDelete', data);
   }
 
-  editArticleTypeSort(data: ArticleTypeSortModel): Observable<ReturnModel> {
+  editArticleTypeSort(data: ArticleTypeSortModel): Observable<ReturnModel<any>> {
     return this.apiService.post('/Settings/ArticleTypeSortEdit', data);
   }
 
