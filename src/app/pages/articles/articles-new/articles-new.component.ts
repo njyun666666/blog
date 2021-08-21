@@ -47,21 +47,38 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
 
 
     this.vditor = new Vditor('vditor', {
-      // mode:'dark',
-      // height: 360,
+      cdn: '/assets/packages/vditor@3.8.6',
+      mode: 'wysiwyg',
+      icon: "material",
       minHeight: 500,
       lang: 'zh_TW',
       toolbarConfig: {
         pin: true,
+      },
+      toolbar: [
+        'undo', 'redo', '|',
+        'headings', 'bold', 'italic', 'strike', '|',
+        'line', 'quote', 'list', 'ordered-list', 'check', 'outdent', 'indent', '|',
+        'code', 'inline-code', '|',
+        'upload', 'link', '|',
+        'table', '|',
+        'edit-mode', 'both', 'preview', '|',
+        'outline'
+      ],
+      preview: {
+        actions: [],
+        theme: {
+          current: 'dark',
+          path: '/assets/packages/vditor@3.8.6/dist/css/content-theme'
+        }
       },
       cache: {
         enable: false,
       },
       upload: {
         accept: 'image/*',
-        token: 'test',
         url: environment.api_url + '/File/Upload',
-        linkToImgUrl: '/api/upload/fetch',
+        max: 2 * 1024 * 1024, // 2MB
         filename(name) {
           return name.replace(/[^(a-zA-Z0-9\u4e00-\u9fa5\.)]/g, '').
             replace(/[\?\\/:|<>\*\[\]\(\)\$%\{\}@~]/g, '').
@@ -87,6 +104,8 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
+
+    this.form.get('content')?.setValue(this.vditor.getValue());
 
   }
 
