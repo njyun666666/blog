@@ -1,14 +1,16 @@
+import { ArticleService } from './../../../@core/services/article.service';
 import { ArticleTypeModel } from './../../../@core/models/settings/article-type.model';
 import { SettingsService } from './../../../@core/services/settings.service';
 import { GoogleAuthService } from './../../../@core/services/google-auth.service';
 import { JwtService } from './../../../@core/services/jwt.service';
 import { environment } from './../../../../environments/environment';
 import { ThemeService } from 'src/app/@core/services/theme.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import Vditor from 'vditor';
 import { MatDialog } from '@angular/material/dialog';
 import { ArticlesTypeFormComponent } from '../../settings/articles-type/articles-type-form/articles-type-form.component';
+import { ArticlesTypeFormPageComponent } from '../../settings/articles-type/articles-type-form-page/articles-type-form-page.component';
 
 @Component({
   selector: 'app-articles-new',
@@ -26,9 +28,16 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
   form = this.fb.group({
     typeID: [null, [Validators.required]],
     title: [null, [Validators.required]],
-    content: ['', [Validators.required]],
+    content: [''],
+    status: 0
   });
 
+  get typeID(): FormControl {
+    return this.form.get('typeID') as FormControl;
+  }
+  get title(): FormControl {
+    return this.form.get('title') as FormControl;
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +45,8 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
     private jwtService: JwtService,
     private googleAuthService: GoogleAuthService,
     private settingsService: SettingsService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private articleService: ArticleService
   ) { }
 
 
@@ -112,7 +122,7 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
 
 
   addType() {
-    const dialogRef = this.dialog.open(ArticlesTypeFormComponent);
+    const dialogRef = this.dialog.open(ArticlesTypeFormPageComponent);
 
     dialogRef.afterClosed().subscribe(result => {
 
@@ -125,10 +135,25 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
   }
 
 
-  onSubmit() {
+  onSubmit(status: number) {
+
+    if (this.isSubmit) return false;
 
     this.form.get('content')?.setValue(this.vditor.getValue());
+    this.form.get('status')?.setValue(status);
 
+    if (!this.form.valid) return false;
+
+    this.articleService.addArticle(this.form.value).subscribe((data) => {
+
+
+
+    }, (error) => {
+
+    });
+
+
+    return true;
   }
 
 

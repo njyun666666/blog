@@ -3,7 +3,7 @@ import { DialogService } from './../../../@core/services/dialog.service'
 import { NoticeService } from './../../../@core/services/notice.service'
 import { SettingsService } from './../../../@core/services/settings.service'
 import { Component, OnInit } from '@angular/core'
-import { ArticleTypeDeleteModel, ArticleTypeEditModel, ArticleTypeModel, ArticleTypeSortModel } from 'src/app/@core/models/settings/article-type.model'
+import { ArticleTypeDeleteModel, ArticleTypeEditModel, ArticleTypeFormModel, ArticleTypeModel, ArticleTypeSortModel } from 'src/app/@core/models/settings/article-type.model'
 import { Subject } from 'rxjs'
 import { EventEmitter } from '@angular/core'
 import { ReturnCodeEnum } from 'src/app/@core/enum/return-code.enum'
@@ -22,7 +22,7 @@ import { ReturnModel } from 'src/app/@core/models/return.model'
 export class ArticlesTypeComponent implements OnInit {
 
 
-  typeList: ArticleTypeModel[] = []
+  typeList: ArticleTypeFormModel[] = [];
 
   constructor(
     private settingsService: SettingsService,
@@ -43,22 +43,25 @@ export class ArticlesTypeComponent implements OnInit {
   get() {
     this.settingsService.getArticleType().subscribe((data: ArticleTypeModel[]) => {
       this.typeList = data.map(x => {
-        x.o_name = x.name
-        x.isEdit = false
-        x.isSubmit = false
-        return x
-      })
+        return {
+          id: x.id,
+          name: x.name,
+          o_name: x.name,
+          isEdit: false,
+          isSubmit: false
+        } as ArticleTypeFormModel
+      });
     });
 
     this.getThemeData();
   }
 
 
-  edit(type: ArticleTypeModel) {
+  edit(type: ArticleTypeFormModel) {
     type.isEdit = true
   }
 
-  delete(type: ArticleTypeModel) {
+  delete(type: ArticleTypeFormModel) {
 
     const dialogRef = this.dialog.open(DialogComponent, {
       minWidth: 300,
@@ -100,7 +103,7 @@ export class ArticlesTypeComponent implements OnInit {
 
   }
 
-  save(type: ArticleTypeModel) {
+  save(type: ArticleTypeFormModel) {
 
     if (type.isSubmit) return false
     if (type.name == null || type.name.length === 0) return false
@@ -133,8 +136,8 @@ export class ArticlesTypeComponent implements OnInit {
     return true
   }
 
-  cancel(type: ArticleTypeModel) {
-    type.name = type.o_name;
+  cancel(type: ArticleTypeFormModel) {
+    type.name = type.o_name as string;
     type.isEdit = false;
   }
 

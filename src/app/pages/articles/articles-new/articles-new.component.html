@@ -15,21 +15,18 @@
           </div>
         </div>
 
-        <!-- <div class="row">
-          <div class="col">
-            分類
-          </div>
-        </div> -->
+
         <div class="row">
           <div class="col">
 
             <mat-form-field appearance="fill" class="me-3">
               <mat-label>分類</mat-label>
-              <mat-select>
+              <mat-select formControlName='typeID'>
                 <mat-option *ngFor="let item of typeList" [value]="item.id">
                   {{item.name}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="typeID.hasError('required')">請選擇分類</mat-error>
             </mat-form-field>
 
 
@@ -39,31 +36,22 @@
         </div>
 
 
-        <!-- <div class="row">
-          <div class="col">
-            標題
-          </div>
-        </div> -->
+
         <div class="row">
           <div class="col">
             <mat-form-field appearance="fill" class="w-100">
               <mat-label>標題</mat-label>
-              <input matInput>
+              <input matInput formControlName='title'>
+              <mat-error *ngIf="title.hasError('required')">請輸入標題</mat-error>
             </mat-form-field>
           </div>
         </div>
 
 
-        <!-- <div class="row">
-          <div class="col">
-            內容
-          </div>
-        </div> -->
+
         <div class="row">
           <div class="col">
-            <!-- <textarea #contentDOM></textarea> -->
             <div id="vditor"></div>
-
           </div>
         </div>
 
@@ -90,9 +78,9 @@
 
     <div class="page-footer-right">
       <button mat-raised-button color="accent" [appLoading]="isSubmit" [disabled]="isSubmit"
-        (click)="onSubmit()">儲存草稿</button>
+        (click)="onSubmit(0)">儲存草稿</button>
       <button mat-raised-button color="primary" [appLoading]="isSubmit" [disabled]="isSubmit"
-        (click)="onSubmit()">發文</button>
+        (click)="onSubmit(1)">發文</button>
     </div>
 
   </div>

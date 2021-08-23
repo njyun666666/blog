@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ReturnCodeEnum } from 'src/app/@core/enum/return-code.enum';
 import { NoticeStatusEnum } from 'src/app/@core/enum/notice-status.enum';
 import { ReturnModel } from 'src/app/@core/models/return.model';
-import { MatDialogRef } from '@angular/material/dialog';
+import { ArticleTypeModel } from 'src/app/@core/models/settings/article-type.model';
 
 @Component({
   selector: 'app-articles-type-form',
@@ -31,7 +31,6 @@ export class ArticlesTypeFormComponent implements OnInit {
     private fb: FormBuilder,
     private settingsService: SettingsService,
     private noticeService: NoticeService,
-    public dialogRef: MatDialogRef<ArticlesTypeFormComponent>,
   ) { }
 
   ngOnInit(): void {
@@ -52,8 +51,8 @@ export class ArticlesTypeFormComponent implements OnInit {
       if (data.code == ReturnCodeEnum.success) {
         this.noticeService.message('新增成功');
 
-        this.getEmitter.emit();
-        this.dialogRef.close({ id: data.data, name: this.form.get('name')?.value });
+        const para: ArticleTypeModel = { id: data.data, name: this.name.value };
+        this.getEmitter.emit(para);
 
       } else {
         this.noticeService.message('失敗: ' + data.message, NoticeStatusEnum.error);

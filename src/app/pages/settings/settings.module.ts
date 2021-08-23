@@ -8,6 +8,7 @@ import { BlogSettingComponent } from './blog-setting/blog-setting.component';
 import { ArticlesTypeComponent } from './articles-type/articles-type.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArticlesTypeFormComponent } from './articles-type/articles-type-form/articles-type-form.component';
+import { ArticlesTypeFormPageComponent } from './articles-type/articles-type-form-page/articles-type-form-page.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ArticlesTypeFormComponent } from './articles-type/articles-type-form/ar
     SettingsComponent,
     BlogSettingComponent,
     ArticlesTypeComponent,
-    ArticlesTypeFormComponent
+    ArticlesTypeFormComponent,
+    ArticlesTypeFormPageComponent
   ],
   imports: [
     CommonModule,
