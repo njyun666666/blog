@@ -6,7 +6,7 @@ import { JwtService } from './../../../@core/services/jwt.service';
 import { environment } from './../../../../environments/environment';
 import { ThemeService } from 'src/app/@core/services/theme.service';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 import Vditor from 'vditor';
 import { MatDialog } from '@angular/material/dialog';
 import { ArticlesTypeFormComponent } from '../../settings/articles-type/articles-type-form/articles-type-form.component';
@@ -29,6 +29,7 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
     typeID: [null, [Validators.required]],
     title: [null, [Validators.required]],
     content: [''],
+    description: [''],
     status: 0
   });
 
@@ -46,7 +47,8 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
     private googleAuthService: GoogleAuthService,
     private settingsService: SettingsService,
     public dialog: MatDialog,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private renderer: Renderer2
   ) { }
 
 
@@ -137,9 +139,16 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
 
   onSubmit(status: number) {
 
+    const html = this.vditor.getHTML();
+    const dom: HTMLElement = this.renderer.createElement('div');
+    this.renderer.setProperty(dom, 'innerHTML', html);
+    const desc = dom.innerText.replace(/\n/g, ' ').replace(/\s\s/g, ' ').substring(0, 100);
+
+
     if (this.isSubmit) return false;
 
     this.form.get('content')?.setValue(this.vditor.getValue());
+    this.form.get('description')?.setValue(desc);
     this.form.get('status')?.setValue(status);
 
     if (!this.form.valid) return false;

@@ -2,6 +2,7 @@ export interface ArticleListModel {
   id: number,
   title: string,
   content: string,
+  description: string,
   typeID: number,
   uid: string,
   status: number,
@@ -11,6 +12,7 @@ export interface ArticleListModel {
 export interface ArticleListAddFormModel {
   typeID: number,
   content: string,
+  description: string,
   status: number
 }
 export interface ArticleListRequestModel {
