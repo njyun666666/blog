@@ -1,0 +1,32 @@
+.page-index {
+  // padding: 0;
+}
+.article-item {
+  // padding: 12px;
+  // margin: 12px;
+  // margin-top: 12px;
+  margin-bottom: 24px;
+
+  .item-type {
+    margin-bottom: 10px;
+
+    mat-chip {
+      font-size: 12px;
+      min-height: auto;
+      padding: 10px;
+    }
+  }
+
+  .mat-card-header .mat-card-title {
+    margin-bottom: 20px;
+  }
+
+  .subtitle-info {
+    display: inline-block;
+    margin-right: 15px;
+
+    .subtitle-info-icon {
+      margin-right: 5px;
+    }
+  }
+}

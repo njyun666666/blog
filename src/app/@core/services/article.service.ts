@@ -2,7 +2,7 @@ import { ReturnModel } from 'src/app/@core/models/return.model';
 import { Observable } from 'rxjs';
 import { ApiService } from './api.service';
 import { Injectable } from '@angular/core';
-import { ArticleListAddFormModel, ArticleListModel } from '../models/article/article-list.model';
+import { ArticleListAddFormModel, ArticleListInfoModel, ArticleListModel, ArticleListRequestModel } from '../models/article/article-list.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,10 @@ export class ArticleService {
 
   addArticle(data: ArticleListAddFormModel): Observable<ReturnModel<number>> {
     return this.apiService.post('/Article/AddArticle', data);
+  }
+
+  getList(data: ArticleListRequestModel): Observable<ArticleListInfoModel[]> {
+    return this.apiService.post('/Article/GetList', data);
   }
 
 }

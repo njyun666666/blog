@@ -13,11 +13,13 @@ const routes: Routes = [{
     // { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
     { path: 'settings', canActivate: [AuthGuard], data: { role: 'Blogger' }, loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) },
     { path: '404', component: PageNotFoundComponent },
+
+    // article
     { path: 'articles', loadChildren: () => import('./articles/articles.module').then(m => m.ArticlesModule) },
     { path: ':account/:article_id', loadChildren: () => import('./articles/articles.module').then(m => m.ArticlesModule) },
 
     // blog index
-    { path: 'i', redirectTo: '' },
+    { path: 'i', redirectTo: '', pathMatch: 'full' },
     { path: ':account', loadChildren: () => import('./index/index.module').then(m => m.IndexModule) },
     { path: '', loadChildren: () => import('./index/index.module').then(m => m.IndexModule) },
 

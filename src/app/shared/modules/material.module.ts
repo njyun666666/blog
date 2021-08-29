@@ -17,6 +17,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 
 const modules = [
   MatToolbarModule,
@@ -35,7 +37,9 @@ const modules = [
   MatSelectModule,
   MatSnackBarModule,
   MatDialogModule,
-  DragDropModule
+  DragDropModule,
+  MatCardModule,
+  MatChipsModule
 ]
 
 @NgModule({
