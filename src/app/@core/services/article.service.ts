@@ -17,8 +17,8 @@ export class ArticleService {
     return this.apiService.post('/Article/AddArticle', data);
   }
 
-  getList(data: ArticleListRequestModel): Observable<ArticleListInfoModel[]> {
-    return this.apiService.post('/Article/GetList', data);
+  getIndexList(data: ArticleListRequestModel): Observable<ArticleListInfoModel[]> {
+    return this.apiService.post('/Article/GetIndexList', data);
   }
 
 }

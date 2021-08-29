@@ -1,10 +1,4 @@
-.page-index {
-  // padding: 0;
-}
 .article-item {
-  // padding: 12px;
-  // margin: 12px;
-  // margin-top: 12px;
   margin-bottom: 24px;
 
   .item-type {
@@ -17,8 +11,12 @@
     }
   }
 
+  .mat-card {
+    height: 100%;
+  }
   .mat-card-header .mat-card-title {
     margin-bottom: 20px;
+    line-height: 2rem;
   }
 
   .subtitle-info {

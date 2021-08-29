@@ -32,7 +32,7 @@ export class IndexComponent implements OnInit {
 
 
       this.themeService.getThemeData({ account: this.targetAccount });
-      this.articleService.getList({ account: this.targetAccount }).subscribe((data: ArticleListInfoModel[]) => {
+      this.articleService.getIndexList({ account: this.targetAccount }).subscribe((data: ArticleListInfoModel[]) => {
         this.articleList = data;
       });
 
