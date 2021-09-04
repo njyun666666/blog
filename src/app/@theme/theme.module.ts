@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { ToolbarMenuComponent } from './components/toolbar-menu/toolbar-menu.component';
 import { ToolbarMenuItemComponent } from './components/toolbar-menu-item/toolbar-menu-item.component';
+import { ArticlesTypeMenuComponent } from './components/articles-type-menu/articles-type-menu.component';
 
 const components = [
   MainLayoutComponent
@@ -19,7 +20,8 @@ const components = [
     MeunComponent,
     LoginComponent,
     ToolbarMenuComponent,
-    ToolbarMenuItemComponent
+    ToolbarMenuItemComponent,
+    ArticlesTypeMenuComponent
   ],
   imports: [
     CommonModule,

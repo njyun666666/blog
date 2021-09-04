@@ -1,0 +1,27 @@
+<mat-nav-list>
+  <a [routerLink]="url" [queryParams]="{type:item.id}" *ngFor="let item of in_menuList">
+
+    <mat-list-item>
+
+
+      <div class="item">
+
+
+        <div>
+          {{ item.name }}
+        </div>
+
+        <div>
+          <div class="item-type">
+            <mat-chip-list>
+              <mat-chip color="primary" [selected]="item.count>0">{{item.count}}</mat-chip>
+            </mat-chip-list>
+          </div>
+        </div>
+
+
+      </div>
+
+    </mat-list-item>
+  </a>
+</mat-nav-list>

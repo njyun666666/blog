@@ -19,4 +19,19 @@ export class JwtService {
     window.localStorage.removeItem('jwtToken');
   }
 
+
+  getAccount(): string {
+    return window.localStorage['account'];
+  }
+
+  saveAccount(account: string) {
+    window.localStorage['account'] = account;
+  }
+
+  destroyAccount() {
+    window.localStorage.removeItem('account');
+  }
+
+
+
 }

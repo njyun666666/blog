@@ -26,7 +26,9 @@ export class ArticlesComponent implements OnInit {
       const account = params.get('account') as string;
       const article_id = params.get('article_id');
 
-      this.themeService.themeAccount$.next(account);
+      // this.themeService.themeAccount$.next(account);
+      this.themeService.getThemeData({ account: account });
+
       console.log('route sub: ', account);
       console.log('route sub: ', article_id);
       // const account = params['account'];

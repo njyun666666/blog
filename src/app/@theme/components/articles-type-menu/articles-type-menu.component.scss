@@ -1,0 +1,10 @@
+.item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+mat-chip {
+  font-size: 12px;
+  min-height: auto;
+  padding: 10px;
+}

@@ -4,6 +4,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuModel } from 'src/app/@core/models/menu.model';
 import { ActivatedRoute } from '@angular/router';
+import { ArticlesTypeMenuModel } from 'src/app/@core/models/article/articles-type-menu.model';
 
 @Component({
   selector: 'app-main-layout',
@@ -16,7 +17,10 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   sidebarOpened = true;
 
   toolbarTitle: string = '';
-  menuList: MenuModel[] = [];
+  menuList: ArticlesTypeMenuModel[] = [];
+
+  account: string = '';
+  url: string = '';
 
   private _mobileQueryListener: () => void;
 
@@ -43,6 +47,13 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
       this.toolbarTitle = data;
     });
 
+
+    this.setURL();
+
+    themeService.themeAccount$.subscribe((account) => {
+      this.setURL();
+    });
+
     themeService.sidebarMenu$.subscribe((data) => {
       this.menuList = data;
     });
@@ -57,6 +68,17 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
+  }
+
+
+  setURL() {
+    this.account = this.themeService.themeAccount;
+
+    if (this.account) {
+      this.url = `/${this.account}`;
+    } else {
+      this.url = '/';
+    }
   }
 
 }

@@ -5,7 +5,11 @@
       <mat-icon>menu</mat-icon>
     </button>
 
-    <h1 class="app-name">{{toolbarTitle}}</h1>
+    <h1 class="app-name">
+      <a [routerLink]="url">
+        {{toolbarTitle}}
+      </a>
+    </h1>
 
     <span class="spacer"></span>
 
@@ -20,7 +24,8 @@
     <mat-sidenav #snav class="mat-sidenav" [mode]="mobileQuery.matches ? 'over' : 'side'"
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="sidebarOpened">
       <mat-nav-list>
-        <app-meun class="app-meun" [in_menuList]="menuList"></app-meun>
+        <!-- <app-meun class="app-meun" [in_menuList]="menuList"></app-meun> -->
+        <app-articles-type-menu [in_menuList]="menuList"></app-articles-type-menu>
       </mat-nav-list>
     </mat-sidenav>
 

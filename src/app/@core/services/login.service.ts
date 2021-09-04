@@ -4,6 +4,7 @@ import { JwtService } from './jwt.service';
 import { GoogleAuthService } from './google-auth.service';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { LoginModel } from '../models/login.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,9 @@ export class LoginService {
     this.googleAuthService.signIn()
       .then(() => {
 
-        this.apiService.post('/Login/Login').subscribe((result) => {
+        this.apiService.post('/Login/Login').subscribe((result: LoginModel) => {
           this.jwtService.saveToken(result.token);
+          this.jwtService.saveAccount(result.account);
 
           // this.user = this.googleAuthService.googleUser;
 
@@ -49,6 +51,8 @@ export class LoginService {
 
 
   }
+
+
 
   logout() {
 
@@ -70,6 +74,7 @@ export class LoginService {
   cleanLoginToken() {
 
     this.jwtService.destroyToken();
+    this.jwtService.destroyAccount();
     this.googleAuthService.signOut();
     this.isLogin$.next(false);
   }

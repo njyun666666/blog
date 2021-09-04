@@ -1,3 +1,4 @@
+import { ArticlesTypeMenuModel } from "./article/articles-type-menu.model";
 import { MenuModel } from "./menu.model";
 
 export interface ThemeModel {
@@ -5,7 +6,7 @@ export interface ThemeModel {
 
 export interface ThemeDataViewModel {
   title: string;
-  menu: MenuModel[];
+  menu: ArticlesTypeMenuModel[];
 }
 export interface ThemeDataRequestModel {
   account?: string;
