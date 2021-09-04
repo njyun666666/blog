@@ -10,6 +10,7 @@
 
         <div class="item-type">
           <mat-chip-list>
+            <mat-chip color="accent" selected *ngIf="item.status==0">草稿</mat-chip>
             <mat-chip color="primary" selected>{{item.typeName}}</mat-chip>
           </mat-chip-list>
         </div>
