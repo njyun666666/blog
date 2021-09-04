@@ -30,8 +30,8 @@ export class IndexComponent implements OnInit {
         this.targetAccount = 'i';
       }
 
+      this.themeService.themeAccount$.next(this.targetAccount);
 
-      this.themeService.getThemeData({ account: this.targetAccount });
       this.articleService.getIndexList({ account: this.targetAccount }).subscribe((data: ArticleListInfoModel[]) => {
         this.articleList = data;
       });

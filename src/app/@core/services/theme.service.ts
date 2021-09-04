@@ -10,15 +10,26 @@ import { Title } from '@angular/platform-browser';
 })
 export class ThemeService {
 
-
+  themeAccount: string = '';
+  themeAccount$ = new Subject<string>();
   toolbarTitle$ = new Subject<string>();
   sidebarMenu$ = new Subject<MenuModel[]>();
 
   constructor(
     private apiService: ApiService,
     private titleService: Title
-  ) { }
+  ) {
 
+    this.themeAccount$.subscribe((account) => {
+      this.themeAccount = account;
+      this.getThemeData({ account: account });
+    });
+
+  }
+
+  setTheme() {
+
+  }
 
   getThemeData(data?: ThemeDataRequestModel) {
     this.apiService.post('/Theme/GetThemeData', data).subscribe((data: ThemeDataViewModel) => {

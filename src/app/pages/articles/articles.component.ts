@@ -1,3 +1,4 @@
+import { ThemeService } from 'src/app/@core/services/theme.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,7 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 export class ArticlesComponent implements OnInit {
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
@@ -18,9 +20,13 @@ export class ArticlesComponent implements OnInit {
     // console.log('account: ', account);
     // console.log('article id: ', id);
 
-    this.route.params.subscribe(params => {
-      const account = params['account'];
-      const article_id = params['article_id'];
+
+
+    this.route.paramMap.subscribe(params => {
+      const account = params.get('account') as string;
+      const article_id = params.get('article_id');
+
+      this.themeService.themeAccount$.next(account);
       console.log('route sub: ', account);
       console.log('route sub: ', article_id);
       // const account = params['account'];
