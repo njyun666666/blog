@@ -6,13 +6,16 @@
     <div class="article-item col-12 col-md-6 col-lg-4 col-xl-4 col-xxl-3"
       *ngFor="let item of articleList | filter : 'typeID':type ">
 
-
       <mat-card class="">
 
         <div class="item-type">
           <mat-chip-list>
             <mat-chip color="accent" selected *ngIf="item.status==0">草稿</mat-chip>
-            <mat-chip color="primary" selected>{{item.typeName}}</mat-chip>
+            <mat-chip color="primary" selected>
+              <a [routerLink]="" [queryParams]="{type:item.typeID}">
+                {{item.typeName}}
+              </a>
+            </mat-chip>
           </mat-chip-list>
         </div>
 
