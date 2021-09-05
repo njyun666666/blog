@@ -13,6 +13,7 @@ export class IndexComponent implements OnInit {
 
   targetAccount: string = '';
   articleList: ArticleListInfoModel[] = [];
+  type?: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,7 +25,7 @@ export class IndexComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       this.targetAccount = params.get('account') as string;
-      console.log('account', this.targetAccount);
+      // console.log('account', this.targetAccount);
 
       if (!this.targetAccount) {
         this.targetAccount = 'i';
@@ -33,12 +34,26 @@ export class IndexComponent implements OnInit {
       // this.themeService.themeAccount$.next(this.targetAccount);
       this.themeService.getThemeData({ account: this.targetAccount });
 
-      this.articleService.getIndexList({ account: this.targetAccount }).subscribe((data: ArticleListInfoModel[]) => {
+      this.articleService.getIndexList({ account: this.targetAccount }).subscribe((data) => {
         this.articleList = data;
       });
 
 
     });
+
+
+    this.route.queryParamMap.subscribe((query) => {
+
+      const type = query.get('type');
+
+      if (type !== undefined && type !== null) {
+        this.type = Number(type);
+      } else {
+        this.type = undefined;
+      }
+
+    });
+
 
 
   }

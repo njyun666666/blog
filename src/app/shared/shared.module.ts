@@ -7,6 +7,7 @@ import { NoticeMessageComponent } from './components/notice-message/notice-messa
 import { LoadingComponent } from './components/loading/loading.component';
 import { LoadingDirective } from './directive/loading.directive';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 
@@ -16,7 +17,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     NoticeMessageComponent,
     LoadingComponent,
     LoadingDirective,
-    DialogComponent
+    DialogComponent,
+    FilterPipe
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
   exports: [
     MaterialModule,
     NavContentComponent,
-    LoadingDirective
+    LoadingDirective,
+    FilterPipe
   ]
 })
 export class SharedModule { }
