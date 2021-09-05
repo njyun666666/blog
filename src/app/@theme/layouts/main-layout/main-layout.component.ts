@@ -48,7 +48,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
     });
 
 
-    this.setURL();
+    // this.setURL();
 
     themeService.themeAccount$.subscribe((account) => {
       this.setURL();
@@ -73,7 +73,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
 
   setURL() {
     this.account = this.themeService.themeAccount;
-
+    // console.log(this.account);
     if (this.account) {
       this.url = `/${this.account}`;
     } else {

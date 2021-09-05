@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { SettingsModel } from '../models/settings/settings.model';
 import { ArticleTypeAddModel, ArticleTypeDeleteModel, ArticleTypeEditModel, ArticleTypeModel, ArticleTypeSortModel } from '../models/settings/article-type.model';
 import { ReturnModel } from '../models/return.model';
+import { BlogEnabledModel } from '../models/settings/blog-enabled.model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +43,7 @@ export class SettingsService {
   editArticleTypeSort(data: ArticleTypeSortModel): Observable<ReturnModel<any>> {
     return this.apiService.post('/Settings/ArticleTypeSortEdit', data);
   }
+
+
 
 }

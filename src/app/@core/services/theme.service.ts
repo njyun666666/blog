@@ -40,6 +40,9 @@ export class ThemeService {
     if (data?.self == 1) {
       this.themeAccount = this.jwtService.getAccount();
       this.themeAccount$.next(this.themeAccount);
+
+    } else if (data?.account !== null) {
+      this.themeAccount$.next(data?.account);
     }
 
     this.apiService.post('/Theme/GetThemeData', data).subscribe((data: ThemeDataViewModel) => {
