@@ -1,18 +1,25 @@
+import { ArticleListInfoModel } from './../../@core/models/article/article-list.model';
 import { ThemeService } from 'src/app/@core/services/theme.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import Vditor from 'vditor';
 
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
   styleUrls: ['./articles.component.scss']
 })
-export class ArticlesComponent implements OnInit {
+export class ArticlesComponent implements OnInit, AfterViewInit {
+
+
+  item!: ArticleListInfoModel;
+  @ViewChild('contentDOM') contentDOM!: ElementRef;
 
   constructor(
     private route: ActivatedRoute,
     private themeService: ThemeService
   ) { }
+
 
   ngOnInit(): void {
     // const account = this.route.snapshot.paramMap.get('account');
@@ -24,17 +31,47 @@ export class ArticlesComponent implements OnInit {
 
     this.route.paramMap.subscribe(params => {
       const account = params.get('account') as string;
-      const article_id = params.get('article_id');
+      // const article_id = params.get('article_id');
 
       // this.themeService.themeAccount$.next(account);
       this.themeService.getThemeData({ account: account });
 
-      console.log('route sub: ', account);
-      console.log('route sub: ', article_id);
+      // console.log('route sub: ', account);
+      // console.log('route sub: ', article_id);
       // const account = params['account'];
     });
 
 
+    this.route.data.subscribe((data) => {
+      this.item = data['content'];
+
+    });
+
+
+
   }
+
+  ngAfterViewInit(): void {
+    console.log(this.contentDOM.nativeElement);
+    this.mde();
+  }
+
+
+  mde() {
+    Vditor.preview(this.contentDOM.nativeElement,
+      this.item.content,
+      {
+        mode: 'dark',
+        cdn: '/assets/packages/vditor@3.8.6',
+        theme: {
+          current: 'dark',
+          path: '/assets/packages/vditor@3.8.6/dist/css/content-theme'
+        }
+      }
+    );
+
+
+  }
+
 
 }

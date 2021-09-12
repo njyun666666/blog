@@ -8,6 +8,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { LoadingDirective } from './directive/loading.directive';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { FilterPipe } from './pipes/filter.pipe';
+import { ArticleTypeLabelComponent } from './components/article-type-label/article-type-label.component';
 
 
 
@@ -18,7 +19,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     LoadingComponent,
     LoadingDirective,
     DialogComponent,
-    FilterPipe
+    FilterPipe,
+    ArticleTypeLabelComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +31,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     MaterialModule,
     NavContentComponent,
     LoadingDirective,
-    FilterPipe
+    FilterPipe,
+    ArticleTypeLabelComponent
   ]
 })
 export class SharedModule { }

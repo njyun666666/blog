@@ -1,0 +1,8 @@
+<mat-chip-list>
+  <mat-chip color="accent" selected *ngIf="in_status==0">草稿</mat-chip>
+  <mat-chip color="primary" selected>
+    <a [routerLink]="" [queryParams]="{type:in_typeID}">
+      {{in_typeName}}
+    </a>
+  </mat-chip>
+</mat-chip-list>
