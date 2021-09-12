@@ -9,18 +9,23 @@
 
 
   <div class="row">
-    <div class="col">
+    <div class="col article-item">
 
       <mat-card class="">
 
-        <div class="item-type">
-          <app-article-type-label [in_status]="item.status" [in_typeID]="item.typeID" [in_typeName]="item.typeName">
+        <div class="article-type-lable">
+          <app-article-type-label [in_status]="item.status" [in_typeID]="item.typeID" [in_typeName]="item.typeName"
+            [in_account]="targetAccount">
           </app-article-type-label>
         </div>
 
         <mat-card-header>
-          <mat-card-title>{{item.title}}</mat-card-title>
-          <mat-card-subtitle>
+          <mat-card-title>
+            <h2>
+              {{item.title}}
+            </h2>
+          </mat-card-title>
+          <mat-card-subtitle class="mb-0">
             <span class="subtitle-info">
               <i class="fas fa-user subtitle-info-icon"></i>{{item.userName}}
             </span>
@@ -38,7 +43,7 @@
 
 
   <div class="row">
-    <div class="col">
+    <div class="col pt-3">
 
 
       <div #contentDOM>

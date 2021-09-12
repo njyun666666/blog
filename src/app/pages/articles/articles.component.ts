@@ -11,7 +11,7 @@ import Vditor from 'vditor';
 })
 export class ArticlesComponent implements OnInit, AfterViewInit {
 
-
+  targetAccount: string = '';
   item!: ArticleListInfoModel;
   @ViewChild('contentDOM') contentDOM!: ElementRef;
 
@@ -31,6 +31,7 @@ export class ArticlesComponent implements OnInit, AfterViewInit {
 
     this.route.paramMap.subscribe(params => {
       const account = params.get('account') as string;
+      this.targetAccount = account;
       // const article_id = params.get('article_id');
 
       // this.themeService.themeAccount$.next(account);
@@ -52,7 +53,7 @@ export class ArticlesComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.contentDOM.nativeElement);
+    // console.log(this.contentDOM.nativeElement);
     this.mde();
   }
 
@@ -62,6 +63,7 @@ export class ArticlesComponent implements OnInit, AfterViewInit {
       this.item.content,
       {
         mode: 'dark',
+        lang: 'zh_TW',
         cdn: '/assets/packages/vditor@3.8.6',
         theme: {
           current: 'dark',

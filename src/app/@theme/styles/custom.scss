@@ -46,7 +46,10 @@
   }
 }
 
-.page-index {
+.article-item {
+  .article-type-lable{
+    margin-bottom: 10px;
+  }
   .mat-card-header > .mat-card-header-text {
     margin: 0;
   }

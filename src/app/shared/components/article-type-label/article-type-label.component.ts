@@ -10,6 +10,7 @@ export class ArticleTypeLabelComponent implements OnInit {
   @Input() in_status: number = 1;
   @Input() in_typeID: number = 0;
   @Input() in_typeName: string = '';
+  @Input() in_account: string = '';
 
 
   constructor() { }
