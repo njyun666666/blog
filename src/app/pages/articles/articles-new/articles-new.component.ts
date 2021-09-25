@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { ReturnCodeEnum } from './../../../@core/enum/return-code.enum';
 import { ArticleService } from './../../../@core/services/article.service';
 import { ArticleTypeModel } from './../../../@core/models/settings/article-type.model';
 import { SettingsService } from './../../../@core/services/settings.service';
@@ -48,7 +50,8 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
     private settingsService: SettingsService,
     public dialog: MatDialog,
     private articleService: ArticleService,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private router: Router
   ) { }
 
 
@@ -68,8 +71,6 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
 
     this.vditor = new Vditor('vditor', {
       cdn: '/assets/packages/vditor@3.8.6',
-      mode: 'wysiwyg',
-      icon: "material",
       minHeight: 500,
       lang: 'zh_TW',
       toolbarConfig: {
@@ -155,7 +156,10 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
 
     this.articleService.addArticle(this.form.value).subscribe((data) => {
 
-
+      if (data.code === ReturnCodeEnum.success) {
+        const account = this.jwtService.getAccount();
+        this.router.navigate([`${account}/${data.data}`]);
+      }
 
     }, (error) => {
 
