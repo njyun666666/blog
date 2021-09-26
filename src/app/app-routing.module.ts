@@ -7,7 +7,8 @@ const routes: Routes = [
 ];
 
 const config: ExtraOptions = {
-  onSameUrlNavigation: 'reload'
+  onSameUrlNavigation: 'reload',
+  scrollPositionRestoration: 'top'
 };
 
 @NgModule({

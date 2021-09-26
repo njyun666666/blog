@@ -3,6 +3,7 @@ import { ApiService } from './api.service';
 import { Injectable } from '@angular/core';
 import { BlogEnabledModel } from '../models/settings/blog-enabled.model';
 import { ArticleEnabledModel } from '../models/article/article-enabled.model';
+import { ArticleEditAuthModel } from '../models/article/article-edit-auth-model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +28,11 @@ export class AuthService {
   }
 
   noAuthRedirect() {
-    this.router.navigateByUrl('/404');
+    this.router.navigateByUrl('/');
   }
 
+  articleEditAuth(data: ArticleEditAuthModel) {
+    return this.apiService.post('/Auth/ArticleEditAuth', data);
+  }
 
 }

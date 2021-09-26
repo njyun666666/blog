@@ -12,6 +12,9 @@ import { ArticlesTypeMenuModel } from '../models/article/articles-type-menu.mode
 })
 export class ThemeService {
 
+  title: string = '';
+  subtitle: string = '';
+
   themeAccount: string = '';
   themeAccount$ = new Subject<string>();
   toolbarTitle$ = new Subject<string>();
@@ -29,13 +32,16 @@ export class ThemeService {
       // this.getThemeData({ account: account });
     });
 
+
+    this.toolbarTitle$.subscribe((title) => {
+      this.title = title;
+    });
+
+
   }
 
-  setTheme() {
 
-  }
-
-  getThemeData(data?: ThemeDataRequestModel) {
+  getThemeData(data?: ThemeDataRequestModel, subtitle?: string) {
 
     if (data?.self == 1) {
       this.themeAccount = this.jwtService.getAccount();
@@ -47,10 +53,23 @@ export class ThemeService {
 
     this.apiService.post('/Theme/GetThemeData', data).subscribe((data: ThemeDataViewModel) => {
       this.toolbarTitle$.next(data.title);
-      this.titleService.setTitle(data.title);
+      this.title = data.title;
+      this.subtitle = subtitle as string;
+      this.setTitle();
 
       this.sidebarMenu$.next(data.menu);
+
     });
+  }
+
+  setTitle() {
+
+    if (this.subtitle) {
+      this.titleService.setTitle(`${this.subtitle} - ${this.title}`);
+    } else {
+      this.titleService.setTitle(`${this.title}`);
+    }
+
   }
 
 }

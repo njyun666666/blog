@@ -6,29 +6,27 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ArticleEnabledGuard implements CanActivate {
+export class ArticleEditAuthGuard implements CanActivate {
 
   constructor(
     private authService: AuthService
-  ) {
-  }
+  ) { }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-
-    const article_id = Number(route.paramMap.get('article_id'));
-    const account = route.paramMap.get('account') as string;
-
     return new Promise((resolve, reject) => {
-      this.authService.checkArticleEnabled({ account: account, article_id: article_id }).subscribe(() => {
+
+      const article_id = Number(route.paramMap.get('article_id'));
+
+      this.authService.articleEditAuth({ article_id: article_id }).subscribe((data) => {
         resolve(true);
-      }, () => {
+      }, (error) => {
         this.authService.noAuthRedirect();
         reject(false);
       });
-    });
 
+    });
   }
 
 }

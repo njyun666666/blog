@@ -20,5 +20,6 @@ export interface ArticleListRequestModel {
 }
 export interface ArticleListInfoModel extends ArticleListModel {
   typeName: string,
-  userName: string
+  userName: string,
+  isSelf: number
 }

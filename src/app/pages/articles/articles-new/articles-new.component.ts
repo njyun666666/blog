@@ -1,4 +1,5 @@
-import { Router } from '@angular/router';
+import { DialogService } from './../../../@core/services/dialog.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ReturnCodeEnum } from './../../../@core/enum/return-code.enum';
 import { ArticleService } from './../../../@core/services/article.service';
 import { ArticleTypeModel } from './../../../@core/models/settings/article-type.model';
@@ -13,6 +14,7 @@ import Vditor from 'vditor';
 import { MatDialog } from '@angular/material/dialog';
 import { ArticlesTypeFormComponent } from '../../settings/articles-type/articles-type-form/articles-type-form.component';
 import { ArticlesTypeFormPageComponent } from '../../settings/articles-type/articles-type-form-page/articles-type-form-page.component';
+import { ArticleListModel } from 'src/app/@core/models/article/article-list.model';
 
 @Component({
   selector: 'app-articles-new',
@@ -21,13 +23,16 @@ import { ArticlesTypeFormPageComponent } from '../../settings/articles-type/arti
 })
 export class ArticlesNewComponent implements OnInit, AfterViewInit {
 
+  debug: boolean = !environment.production;
 
+  add: boolean = true;
   typeList: ArticleTypeModel[] = []
   vditor!: Vditor;
 
   isSubmit: boolean = false;
 
   form = this.fb.group({
+    id:[],
     typeID: [null, [Validators.required]],
     title: [null, [Validators.required]],
     content: [''],
@@ -51,17 +56,27 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
     public dialog: MatDialog,
     private articleService: ArticleService,
     private renderer: Renderer2,
-    private router: Router
+    private router: Router,
+    private dialogService: DialogService,
+    private route: ActivatedRoute
   ) { }
 
 
   ngOnInit(): void {
     this.themeService.getThemeData({ self: 1 });
 
-
-    this.settingsService.getArticleType().subscribe((data: ArticleTypeModel[]) => {
+    this.settingsService.getArticleType().subscribe((data) => {
       this.typeList = data;
     });
+
+
+
+    const data: ArticleListModel = this.route.snapshot.data['data'];
+    // console.log(data);
+    if (data) {
+      this.add = false;
+      this.form.patchValue(data);
+    }
 
 
 
@@ -111,6 +126,11 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
       },
       after: () => {
         this.vditor.setTheme('dark', 'dark');
+
+        if (data) {
+          this.vditor.setValue(data.content);
+        }
+
       }
     });
 
@@ -159,6 +179,9 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
       if (data.code === ReturnCodeEnum.success) {
         const account = this.jwtService.getAccount();
         this.router.navigate([`${account}/${data.data}`]);
+
+      } else {
+        this.dialogService.text({ title: '失敗', content: data.message });
       }
 
     }, (error) => {

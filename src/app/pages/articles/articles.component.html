@@ -35,7 +35,10 @@
 
           </mat-card-subtitle>
         </mat-card-header>
-
+        <mat-card-actions>
+          <a *ngIf="item.isSelf===1" mat-button color="accent" [routerLink]="['/articles/new/'+item.id]">修改</a>
+          <!-- <button mat-button>SHARE</button> -->
+        </mat-card-actions>
       </mat-card>
 
     </div>

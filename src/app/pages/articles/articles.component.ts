@@ -28,6 +28,11 @@ export class ArticlesComponent implements OnInit, AfterViewInit {
     // console.log('article id: ', id);
 
 
+    this.route.data.subscribe((data) => {
+      this.item = data['content'];
+
+    });
+
 
     this.route.paramMap.subscribe(params => {
       const account = params.get('account') as string;
@@ -35,20 +40,9 @@ export class ArticlesComponent implements OnInit, AfterViewInit {
       // const article_id = params.get('article_id');
 
       // this.themeService.themeAccount$.next(account);
-      this.themeService.getThemeData({ account: account });
-
-      // console.log('route sub: ', account);
-      // console.log('route sub: ', article_id);
-      // const account = params['account'];
-    });
-
-
-    this.route.data.subscribe((data) => {
-      this.item = data['content'];
+      this.themeService.getThemeData({ account: account }, this.item.title);
 
     });
-
-
 
   }
 
