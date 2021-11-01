@@ -1,8 +1,9 @@
+import { GapiLoadGuard } from './@core/guards/gapi-load.guard';
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) },
+  { path: '', canActivate: [GapiLoadGuard], loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) },
   { path: '**', redirectTo: '' }
 ];
 
