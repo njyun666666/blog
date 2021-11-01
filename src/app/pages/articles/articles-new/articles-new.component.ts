@@ -46,6 +46,9 @@ export class ArticlesNewComponent implements OnInit, AfterViewInit {
   get title(): FormControl {
     return this.form.get('title') as FormControl;
   }
+  get status(): FormControl {
+    return this.form.get('status') as FormControl;
+  }
 
   constructor(
     private fb: FormBuilder,

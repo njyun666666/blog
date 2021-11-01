@@ -78,11 +78,11 @@
     </div>
 
     <div class="page-footer-right">
-      <button mat-raised-button color="accent" *ngIf="add" [appLoading]="isSubmit" [disabled]="isSubmit"
+      <button mat-raised-button color="accent" *ngIf="status.value===0" [appLoading]="isSubmit" [disabled]="isSubmit"
         (click)="onSubmit(0)">儲存草稿</button>
       <button mat-raised-button color="primary" [appLoading]="isSubmit" [disabled]="isSubmit" (click)="onSubmit(1)">
-        <span *ngIf="add">發文</span>
-        <span *ngIf="!add">送出修改</span>
+        <span *ngIf="status.value!==1">發文</span>
+        <span *ngIf="status.value===1">修改</span>
       </button>
     </div>
 
