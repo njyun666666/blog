@@ -1,0 +1,44 @@
+# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm install -g @angular/cli@12.0.3
+    - run: npm run build --if-present
+    - name: new opensshkey 
+      run : sudo echo '${{ secrets.GCP_VM_SSH }}' > opensshkey
+    - name: Delete Existing Files
+      run : sudo ssh -i opensshkey -o StrictHostKeyChecking=no ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} 'rm -rf /var/www/blog/www/*'
+    - name: Compress and Copy New Files to server
+      run : |
+            cd dist/blog/
+            tar -czvf ../../dist.tar.gz ./
+            cd ..
+            cd ..
+            sudo scp -v -i opensshkey -o StrictHostKeyChecking=no -r dist.tar.gz ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }}:/var/www/blog/www/
+    - name: Uncompress new Files
+      run : sudo ssh -i opensshkey -o StrictHostKeyChecking=no ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} 'cd /var/www/blog/www/ && sudo tar -xzvf dist.tar.gz && sudo rm dist.tar.gz'
