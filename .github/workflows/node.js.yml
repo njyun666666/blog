@@ -32,7 +32,7 @@ jobs:
     - name: new opensshkey 
       run : sudo echo '${{ secrets.GCP_VM_SSH }}' > opensshkey
     - name: Delete Existing Files
-      run : sudo ssh -i opensshkey -o StrictHostKeyChecking=no ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} 'rm -rf /var/www/blog/www/*'
+      run : sudo ssh -i opensshkey -o StrictHostKeyChecking=no ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} 'sudo rm -rf /var/www/blog/www/*'
     - name: Compress and Copy New Files to server
       run : |
             cd dist/blog/
