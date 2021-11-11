@@ -42,3 +42,6 @@ jobs:
             sudo scp -v -i opensshkey -o StrictHostKeyChecking=no -r dist.tar.gz ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }}:/var/www/blog/www/
     - name: Uncompress new Files
       run : sudo ssh -i opensshkey -o StrictHostKeyChecking=no ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} 'cd /var/www/blog/www/ && sudo tar -xzvf dist.tar.gz && sudo rm dist.tar.gz'
+    - name: change file group
+      run : sudo ssh -i opensshkey -o StrictHostKeyChecking=no ${{ secrets.GCP_VM_USER }}@${{ secrets.GCP_VM_HOST }} 'sudo chgrp -R www-data /var/www/blog/www'
+      
